@@ -18,7 +18,7 @@ public class PlayerManager1 : MonoBehaviour
     public float Speed { get => speed; }
     public float JumpForce { get => jumpForce; }
     public float DashDistance { get => dashDistance; }
-    public float DashSmooth { get => dashTime; }
+    public float DashTime { get => dashTime; }
     public List<string> TagsToAvoid { get => tagsToAvoid; }
 
     void Update()
@@ -26,10 +26,9 @@ public class PlayerManager1 : MonoBehaviour
         xDirection = Input.GetAxisRaw("Horizontal");
 
         if (xDirection != 0){
-            foreach (PlayerController player in players)
-            {
-                player.InteractWith_Movement(xDirection);
-            }
+            
+            players[0]?.InteractWith_Movement(xDirection);
+            players[1]?.InteractWith_Movement(-xDirection);
         }
 
         if (Input.GetButton("Jump"))
