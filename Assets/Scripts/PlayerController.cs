@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     float Speed { get => manager1.Speed; }
     float JumpForce { get => manager1.JumpForce; }
     float DashDistance { get => manager1.DashDistance; }
-    float DashSmooth { get => manager1.DashSmooth; }
+    float DashTime { get => manager1.DashTime; }
     public List<string> TagsToAvoid { get => manager1.TagsToAvoid; }
 
     private void Awake()
@@ -77,7 +77,10 @@ public class PlayerController : MonoBehaviour
         if (!Move(direction))
             return false;
 
-        currentDirection.x = direction;
+        if (direction == 0)
+            return true;
+
+        currentDirection.x = direction > 0 ? 1 : -1;
         return true;
     }
 
@@ -90,6 +93,8 @@ public class PlayerController : MonoBehaviour
 
         if (distance.HasValue)
             Dash(distance.Value);
+        else
+            Dash(DashDistance * currentDirection.x);
     }
 
     public void InteractWith_Jump()
@@ -192,7 +197,9 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.gameObject == gameObject) continue;
 
                 if (Vector2.Angle(direction *-1, hit.normal) < 30)
-                    return hit.distance;
+                {
+                    return direction.x != 0 ? hit.distance * direction.x : hit.distance * direction.y;
+                }
             }
         }
 
@@ -203,9 +210,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 finalTarget = default;
 
-        if (finalDistance > DashDistance)
-            finalTarget = new Vector2(transform.position.x + DashDistance * currentDirection.x, transform.position.y);
-        else
+        //if (DashDistance < finalDistance)
+        //    finalTarget = new Vector2(transform.position.x + DashDistance * currentDirection.x, transform.position.y);
+        //else
             finalTarget = new Vector2(transform.position.x + finalDistance, transform.position.y);
 
         StartCoroutine(DashTo(finalTarget));
@@ -213,14 +220,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DashTo(Vector2 final)
     {
-        Vector2 target;
-        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashSmooth, Speed);
+        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
         inDash = true;
         float curentTime = 0;
 
-        while (curentTime < DashSmooth)
+        while (curentTime < DashTime)
         {
-            transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashSmooth, Speed);
+            transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
             yield return new WaitForEndOfFrame();
             curentTime += Time.deltaTime;
         }
