@@ -460,13 +460,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   isGrounded: 0
-  radiusCheck: 0
+  radiusCheck: 0.5
   col: {fileID: 0}
-  jumpForce: 0
-  gravity: 0
-  gravityScale: 0
+  jumpForce: 10
+  gravity: -9.81
+  gravityScale: 2
 --- !u!1 &481415241
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847934667}
   - component: {fileID: 847934666}
+  - component: {fileID: 847934665}
   m_Layer: 0
   m_Name: Camera2
   m_TagString: MainCamera
@@ -613,6 +614,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!61 &847934665
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847934664}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!20 &847934666
 Camera:
   m_ObjectHideFlags: 0
@@ -644,7 +671,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 695
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
