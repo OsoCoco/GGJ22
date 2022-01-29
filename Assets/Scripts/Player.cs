@@ -4,57 +4,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public LayerMask groundMask;
+    [Header("Jump Variables")]
+    [SerializeField] LayerMask whatIsGround;
+    [SerializeField] bool isGrounded;
+    [SerializeField] float checkDistance;
 
-    public bool isGrounded;
+    [SerializeField]
+    Rigidbody2D rb;
 
-    public float radiusCheck;
-
-    public Collider2D col;
-
-
-    float velocity;
-    public float jumpForce;
-    public float gravity;
-    public float gravityScale;
-
-
-
-    private void Update()
+  
+    public void Move(Vector2 m, float s)
     {
+        rb.MovePosition((Vector2)transform.position + m * s * Time.deltaTime);
+    }
 
-        velocity += gravity * gravityScale * Time.deltaTime;
 
-        if (isGrounded && velocity < 0)
-        {
-            velocity = 0;
-        }
-
-        transform.Translate(new Vector3(0, velocity, 0) * Time.deltaTime);
+    public void Jump(float force)
+    {
+        if (isGrounded)
+            rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
     private void FixedUpdate()
     {
-        col = Physics2D.OverlapCircle(transform.position, radiusCheck,groundMask);
-
-        if (col != null)
+        if(Physics2D.Raycast(transform.position,Vector2.down,checkDistance,whatIsGround))
+        {
             isGrounded = true;
+        }
         else
+        {
             isGrounded = false;
-    }
-    public void Movement(Vector2 m, float speed)
-    {
-        transform.Translate(m * speed * Time.deltaTime);
-    }
-
-    public void Jump()
-    {
-        if(isGrounded)
-            velocity = jumpForce;
-       
-    }
-
-    public void Dash()
-    {
-
+        }
     }
 }
