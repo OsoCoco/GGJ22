@@ -15,7 +15,7 @@ MonoBehaviour:
   tagsToAvoid: []
   speed: 2.5
   jumpForce: 3.7
-  jumpCoolDown: 0.4
+  jumpCoolDown: 5
   dashDistance: 2
   dashSpeed: 20
   dashTime: 0.2

@@ -10,6 +10,7 @@ namespace Xolito.Core
         [SerializeField] GameObject counter;
         [SerializeField] GameObject staminaCounter;
 
+        [System.Serializable]
         class Level
         {
             [SerializeField] GameObject startPoint;
