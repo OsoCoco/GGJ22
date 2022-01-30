@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Xolito.Control;
+using Xolito.Core;
 
 namespace Xolito.Movement
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class Mover : MonoBehaviour
     {
+        //BORRAR SI ROMPE ALGO
+        #region AUDIO 
+        PlayerManager1 manager1;
+        public AudioSource source;
+        #endregion
+
+
         #region variables
         [SerializeField] PlayerSettings pSettings = null;
         Rigidbody2D rgb2d;
@@ -28,6 +36,10 @@ namespace Xolito.Movement
 
         private void Awake()
         {
+            //AUDIO
+            manager1 = GetComponent<PlayerManager1>();
+           
+
             rgb2d = GetComponent<Rigidbody2D>();
             boxCollider = GetComponent<BoxCollider2D>();
         }
@@ -76,7 +88,13 @@ namespace Xolito.Movement
             {
                 if (colliderToAvoid)
                 {
+                    //AUDIO
+                    source.PlayOneShot(manager1.jump);
+
+                    //Debug.Log("Jumping");
+
                     rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+          
                     Ignore_Collition();
                 }    
             }
@@ -238,6 +256,10 @@ namespace Xolito.Movement
 
             transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, dashTime, pSettings.DashSpeed);
             float currentTime = 0;
+
+
+            //AUDIO
+            source.PlayOneShot(manager1.dash);
 
             while (currentTime < dashTime)
             {

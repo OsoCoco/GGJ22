@@ -7,13 +7,16 @@ namespace Xolito.Core
 {
     public class PlayerManager1 : MonoBehaviour
     {
+        #region AUDIO //Borrar si rompe algo
+        public AudioClip jump, dash;
+        #endregion
+        
         #region Variables
         [Header("References")]
         [SerializeField] PlayerController[] players = default;
 
         float xDirection = 0;
         #endregion
-
         void Update()
         {
             Check_Movement();
