@@ -29,13 +29,18 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = false;
     BoxCollider2D colliderToAvoid = default;
     (bool isTouchingWall, bool isAtRight) wallDetection;
+    public bool canJump = true;
 
+    #region Properties
     float Speed { get => manager1.Speed; }
     float JumpForce { get => manager1.JumpForce; }
+    float JumpCoolDown { get => manager1.JumpCoolDown; }
     float DashDistance { get => manager1.DashDistance; }
     float DashTime { get => manager1.DashTime; }
-    public List<string> TagsToAvoid { get => manager1.TagsToAvoid; }
+    public List<string> TagsToAvoid { get => manager1.TagsToAvoid; } 
+    #endregion
 
+    #region Unity methods
     private void Awake()
     {
         manager1 = GameObject.FindObjectOfType<PlayerManager1>();
@@ -44,33 +49,28 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        canJump = true;
+    }
+
     void Update()
     {
         //if (!Check_Platform())
         //    Check_Ground();
         Check_Ground();
 
-        if (!isGrounded) Check_Platform();
+        //if (!isGrounded) Check_Platform();
 
         Check_Wall();
     }
 
-    private bool Check_Platform()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!isGrounded && colliderToAvoid)
-        {
-            if (boxCollider.bounds.min.y >= colliderToAvoid.bounds.max.y)
-            {
-                Ignore_Collition(false);
-                colliderToAvoid = default;
-            }
-
-            //Check_WayToMove(Vector2.down);
-            //isGrounded = true;
-        }
-
-        return false;
-    }
+        if (colliderToAvoid)
+            Ignore_Collition();
+    } 
+    #endregion
 
     public bool InteractWith_Movement(float direction)
     {
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (inDash)
             return;
 
-        float? distance = Check_WayToMove(currentDirection, DashDistance);
+        float? distance = Check_WayToMove(currentDirection, 1);
 
         if (distance.HasValue)
             Dash(distance.Value);
@@ -99,20 +99,29 @@ public class PlayerController : MonoBehaviour
 
     public void InteractWith_Jump()
     {
-        if (!isGrounded || inDash) return;
+        if (!isGrounded || inDash || !canJump) return;
 
         float? distance = Check_WayToMove(Vector2.up, 1f, TagsToAvoid);
 
-        if (distance.HasValue && colliderToAvoid)
+        if (distance.HasValue)
         {
-            Jump();
-            Ignore_Collition();
+            if (colliderToAvoid)
+            {
+                Jump();
+                Ignore_Collition(); 
+            }
         }
         else
             Jump();
     }
 
-    private void Ignore_Collition(bool shouldIgnore = true) => Physics2D.IgnoreCollision(boxCollider, colliderToAvoid, shouldIgnore);
+    private void Ignore_Collition(bool shouldIgnore = true)
+    {
+        Physics2D.IgnoreCollision(boxCollider, colliderToAvoid, shouldIgnore);
+
+        if (!shouldIgnore)
+            colliderToAvoid = default;
+    }
 
     void Check_Ground()
     {
@@ -120,8 +129,14 @@ public class PlayerController : MonoBehaviour
 
         if (distance.HasValue)
         {
+            if (!isGrounded && canJump)
+                StartCoroutine(Disable_Jump());
+
             if (distance.Value <= .5f)
                 isGrounded = true;
+
+            if (colliderToAvoid)
+                Ignore_Collition(false);
         }
         else
             isGrounded = false;
@@ -160,7 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D[] hit2D;
 
-        Vector2 offset1 = direction * offset;
+        Vector2 offset1 = direction * .1f;
         Vector3 startPosition = new Vector3()
         {
             x = transform.position.x + offset1.x,
@@ -168,7 +183,7 @@ public class PlayerController : MonoBehaviour
             z = 0
         };
 
-        hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, 0, currentDirection);
+        hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, 0, currentDirection, offset);
 
         if (hit2D.Length != 0)
         {
@@ -176,22 +191,9 @@ public class PlayerController : MonoBehaviour
             {
                 if (tagsToAvoid != null && tagsToAvoid.Count != 0)
                 {
-                    bool founded = false;
-                    foreach (string tag in tagsToAvoid)
-                    {
-                        if (hit.transform.tag == tag)
-                        {
-                            founded = true;
-                            break;
-                        }
-                    }
+                    bool founded = Find_TagIn(tagsToAvoid, hit.transform.tag);
 
-                    if (founded && !colliderToAvoid)
-                        colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
-                    else if (founded && colliderToAvoid == hit.transform.GetComponent<BoxCollider2D>())
-                        colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
-                    else if (!founded && colliderToAvoid)
-                        colliderToAvoid = default;
+                    Check_Collider(hit, founded);
                 }
 
                 if (hit.transform.gameObject == gameObject) continue;
@@ -204,15 +206,40 @@ public class PlayerController : MonoBehaviour
         }
 
         return null;
+
+        void Check_Collider(RaycastHit2D hit, bool founded)
+        {
+            if (founded && !colliderToAvoid)
+                colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
+            else if (founded && colliderToAvoid == hit.transform.GetComponent<BoxCollider2D>())
+                colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
+            else if (!founded && colliderToAvoid)
+                colliderToAvoid = default;
+        }
+    }
+
+    private bool Find_TagIn(List<string> tagsToAvoid, string tagToFind)
+    {
+        bool founded = false;
+        foreach (string tag in tagsToAvoid)
+        {
+            if (tagToFind == tag)
+            {
+                founded = true;
+                break;
+            }
+        }
+
+        return founded;
     }
 
     private void Dash(float finalDistance)
     {
         Vector2 finalTarget = default;
 
-        //if (DashDistance < finalDistance)
-        //    finalTarget = new Vector2(transform.position.x + DashDistance * currentDirection.x, transform.position.y);
-        //else
+        if (DashDistance < finalDistance)
+            finalTarget = new Vector2(transform.position.x + DashDistance * currentDirection.x, transform.position.y);
+        else
             finalTarget = new Vector2(transform.position.x + finalDistance, transform.position.y);
 
         StartCoroutine(DashTo(finalTarget));
@@ -220,8 +247,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DashTo(Vector2 final)
     {
-        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
         inDash = true;
+        FreezeVerticalPosition();
+
+        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
         float curentTime = 0;
 
         while (curentTime < DashTime)
@@ -233,6 +262,26 @@ public class PlayerController : MonoBehaviour
 
         dashVelocity = default;
         inDash = false;
+        FreezeVerticalPosition(false);
         yield break;
+    }
+
+    private void FreezeVerticalPosition(bool shouldFreeze = true)
+    {
+        rgb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        if (!shouldFreeze)
+            return;
+
+        rgb2d.constraints = RigidbodyConstraints2D.FreezePositionY;
+    }
+
+    IEnumerator Disable_Jump()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(JumpCoolDown);
+        
+        if (isGrounded)
+            canJump = true;
     }
 }
