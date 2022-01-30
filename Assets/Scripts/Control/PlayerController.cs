@@ -10,7 +10,7 @@ namespace Xolito.Control
     public class PlayerController : MonoBehaviour
     {
         #region variables
-        [SerializeField] Animator animator;
+        [SerializeField] Animator animatorXolos;
         [SerializeField] PlayerSettings pSettings = null;
         Movement.Mover mover;
         #endregion
@@ -18,7 +18,7 @@ namespace Xolito.Control
         #region Unity methods
         private void Awake()
         {
-            //animator = GetComponent<Animator>();
+            animatorXolos = GetComponent<Animator>();
 
             mover = GetComponent<Movement.Mover>();
         }
@@ -34,10 +34,11 @@ namespace Xolito.Control
         {
             if (mover.InteractWith_Movement(direction))
             {
-
+                animatorXolos.SetInteger(0, (int)direction);
             }
-            //if (direction == 0)
-            //    return true;
+
+                //if (direction == 0)
+                //    return true;
         }
 
         public void InteractWith_Dash()

@@ -3785,7 +3785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318878557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.7156, y: -4.74, z: 0}
+  m_LocalPosition: {x: 15.7156, y: -3.97, z: 0}
   m_LocalScale: {x: 7.038141, y: 0.47897196, z: 1}
   m_Children: []
   m_Father: {fileID: 436502525}
@@ -4157,7 +4157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387117218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.763, y: -6.11, z: 0}
+  m_LocalPosition: {x: 20.763, y: -7.84, z: 0}
   m_LocalScale: {x: 17.132767, y: 0.47897196, z: 1}
   m_Children: []
   m_Father: {fileID: 436502525}
@@ -9652,6 +9652,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 948453015}
     m_Modifications:
+    - target: {fileID: 4011542559037227120, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: pSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9709,16 +9713,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9556903
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9556903
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2a3826b5e8dc12e44a68560c92f0d908, type: 3}
+    - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062973, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Size.x
       value: 0.7865782
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062973, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Size.y
-      value: 0.8729633
+      value: 0.80520123
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062973, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Offset.x
@@ -9726,7 +9742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062973, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Offset.y
-      value: 0.000000044703484
+      value: 0.033881098
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062973, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -9736,6 +9752,18 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.9142857
       objectReference: {fileID: 0}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: pSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: animatorNegro
+      value: 
+      objectReference: {fileID: 1456674786}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: animatorXolos
+      value: 
+      objectReference: {fileID: 1456674786}
     - target: {fileID: 6440591507710062975, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Name
       value: XolitoNegro
@@ -10081,6 +10109,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 948453015}
     m_Modifications:
+    - target: {fileID: 4011542559037227120, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: pSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10099,11 +10131,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.77
+      value: 13.76
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.46
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10139,11 +10171,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Size.x
-      value: 0.95522386
+      value: 0.9556903
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Size.y
-      value: 0.9561577
+      value: 0.863806
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062963, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Sprite
@@ -10177,6 +10209,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.9142857
       objectReference: {fileID: 0}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1324658391}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: pSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: animatorNegro
+      value: 
+      objectReference: {fileID: 1324658391}
+    - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: animatorXolos
+      value: 
+      objectReference: {fileID: 1324658391}
     - target: {fileID: 6440591507710062975, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_Name
       value: XolitoBlanco
