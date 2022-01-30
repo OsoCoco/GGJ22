@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     (bool isTouchingWall, bool isAtRight) wallDetection;
     public bool canJump = true;
 
+    public bool testJump = false;
+
     #region Properties
     float Speed { get => manager1.Speed; }
     float JumpForce { get => manager1.JumpForce; }
@@ -63,6 +65,9 @@ public class PlayerController : MonoBehaviour
         //if (!isGrounded) Check_Platform();
 
         Check_Wall();
+
+        float? test = Check_WayToMove(Vector2.up, 1f, TagsToAvoid);
+        testJump = test.HasValue;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -101,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded || inDash || !canJump) return;
 
-        float? distance = Check_WayToMove(Vector2.up, 1f, TagsToAvoid);
+        float? distance = Check_WayToMove(Vector2.up, .5f, TagsToAvoid);
 
         if (distance.HasValue)
         {
@@ -129,11 +134,14 @@ public class PlayerController : MonoBehaviour
 
         if (distance.HasValue)
         {
-            if (!isGrounded && canJump)
-                StartCoroutine(Disable_Jump());
+            //if (!isGrounded && canJump)
+            //    StartCoroutine(Disable_Jump());
 
-            if (distance.Value <= .5f)
+            if (distance.Value <= .5f && !isGrounded)
+            {
                 isGrounded = true;
+                StartCoroutine(Disable_Jump());
+            }
 
             if (colliderToAvoid)
                 Ignore_Collition(false);
@@ -175,15 +183,17 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D[] hit2D;
 
-        Vector2 offset1 = direction * .1f;
+        Vector2 offset1 = direction * offset;
         Vector3 startPosition = new Vector3()
         {
-            x = transform.position.x + offset1.x,
-            y = transform.position.y + offset1.y,
+            x = transform.position.x + direction.x * offset,
+            y = transform.position.y + direction.y * offset,
             z = 0
         };
 
-        hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, 0, currentDirection, offset);
+        //float angle = Get_AngleDirection();
+
+        hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, 0, currentDirection, 1);
 
         if (hit2D.Length != 0)
         {
@@ -217,6 +227,16 @@ public class PlayerController : MonoBehaviour
                 colliderToAvoid = default;
         }
     }
+
+    //private float Get_AngleDirection(Vector2 direction)
+    //{
+    //    switch (direction)
+    //    {
+    //        case Vector2.up:
+
+    //            break;
+    //    }
+    //}
 
     private bool Find_TagIn(List<string> tagsToAvoid, string tagToFind)
     {

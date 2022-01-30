@@ -865,6 +865,14 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: jumpCoolDown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
       propertyPath: players.Array.size
       value: 1
       objectReference: {fileID: 0}
