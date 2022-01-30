@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc751cb62de86834eb0622f5ffd76aeb, type: 3}
   m_Name: LevelList
   m_EditorClassIdentifier: 
-  counter: {fileID: 1235979876686163037, guid: de957c84d412fdf428718cf3b330db09, type: 3}
+  levels:
+  - startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    LevelContent: {fileID: 0}
+  - startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    LevelContent: {fileID: 0}
+  counter: {fileID: 0}
   staminaCounter: {fileID: 0}
