@@ -681,6 +681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 6440591507710062975, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
 --- !u!1 &2022796503
@@ -856,6 +860,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: dashTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: jumpCoolDown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
+      propertyPath: players.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8897894238878285188, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
       propertyPath: players.Array.data[0]
       value: 

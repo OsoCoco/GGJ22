@@ -11,12 +11,14 @@ public class PlayerManager1 : MonoBehaviour
     [Header("Configuration")]
     [SerializeField] float speed = 5;
     [SerializeField] float jumpForce = 5;
+    [SerializeField] float jumpCoolDown = 1f;
     [SerializeField] float dashDistance = 5;
     [SerializeField] float dashTime = 3;
     float xDirection = 0;
 
     public float Speed { get => speed; }
     public float JumpForce { get => jumpForce; }
+    public float JumpCoolDown { get => jumpCoolDown; }
     public float DashDistance { get => dashDistance; }
     public float DashTime { get => dashTime; }
     public List<string> TagsToAvoid { get => tagsToAvoid; }
@@ -28,7 +30,7 @@ public class PlayerManager1 : MonoBehaviour
         if (xDirection != 0){
             
             players[0]?.InteractWith_Movement(xDirection);
-            players[1]?.InteractWith_Movement(-xDirection);
+            //players[1]?.InteractWith_Movement(-xDirection);
         }
 
         if (Input.GetButton("Jump"))
