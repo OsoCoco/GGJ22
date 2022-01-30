@@ -9,6 +9,11 @@ namespace Xolito.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        //BORRAR SI ROMPE ALGO
+        #region AUDIO 
+        [SerializeField] public AudioSource source;
+        #endregion
+
         #region variables
         [SerializeField] Animator animatorXolos;
         [SerializeField] PlayerSettings pSettings = null;
@@ -19,7 +24,6 @@ namespace Xolito.Control
         private void Awake()
         {
             animatorXolos = GetComponent<Animator>();
-
             mover = GetComponent<Movement.Mover>();
         }
 
@@ -34,18 +38,17 @@ namespace Xolito.Control
         {
             if (mover.InteractWith_Movement(direction))
             {
-                animatorXolos.SetInteger(0, (int)direction);
+                //animatorXolos.SetInteger(0, (int)direction);
+                //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Walk));
             }
-
-                //if (direction == 0)
-                //    return true;
         }
 
         public void InteractWith_Dash()
         {
             if (mover.Dash())
             {
-
+                //animatorXolos.SetBool(0, true);
+                //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Dash));
             }
         }
 
@@ -53,7 +56,8 @@ namespace Xolito.Control
         {
             if (mover.Jump())
             {
-
+                //animatorXolos.SetBool(0, false);
+                source.PlayOneShot(pSettings.Get_Audio(BasicActions.Jump));
             }
         }
         #endregion

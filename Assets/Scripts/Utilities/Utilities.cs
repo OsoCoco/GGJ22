@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Xolito.Utilities
 {
-    public static class Utilities
+    public class Utilities
     {
         public static float Get_AngleDirection(Vector2 direction)
         {
@@ -34,5 +34,7 @@ namespace Xolito.Utilities
 
             return founded;
         }
+
+        public static void StopTime(bool shouldStop = true) => Time.timeScale = shouldStop? 0 : 1;
     } 
 }

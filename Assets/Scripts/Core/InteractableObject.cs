@@ -11,7 +11,7 @@ namespace Xolito.Core
         {
             if (collision.transform.tag == "Player")
             {
-                Levels level = GameObject.FindObjectOfType<Levels>();
+                LevelController level = GameObject.FindObjectOfType<LevelController>();
 
                 if (interaction == Interaction.Damage)
                 {
@@ -24,6 +24,7 @@ namespace Xolito.Core
                 else if (interaction == Interaction.Coin)
                 {
                     level.Add_Coin();
+                    gameObject.SetActive(false);
                 }
             }
         }

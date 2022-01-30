@@ -9,13 +9,6 @@ namespace Xolito.Movement
     [RequireComponent(typeof(BoxCollider2D))]
     public class Mover : MonoBehaviour
     {
-        //BORRAR SI ROMPE ALGO
-        #region AUDIO 
-        PlayerManager1 manager1;
-        public AudioSource source;
-        #endregion
-
-
         #region variables
         [SerializeField] PlayerSettings pSettings = null;
         Rigidbody2D rgb2d;
@@ -36,8 +29,6 @@ namespace Xolito.Movement
 
         private void Awake()
         {
-            //AUDIO
-            manager1 = GetComponent<PlayerManager1>();
            
             rgb2d = GetComponent<Rigidbody2D>();
             boxCollider = GetComponent<BoxCollider2D>();

@@ -8,7 +8,10 @@ namespace Xolito.Core
     public class PlayerManager1 : MonoBehaviour
     {
         #region AUDIO //Borrar si rompe algo
+        MenuManager menuManager;
+
         public AudioClip jump, dash;
+        private bool canCheck = false;
 
         #endregion
         
@@ -18,16 +21,36 @@ namespace Xolito.Core
 
         float xDirection = 0;
         #endregion
+        private void Awake()
+        {
+            menuManager = GameObject.FindObjectOfType<MenuManager>();
+        }
+
+        private void Start()
+        {
+            canCheck = true;
+        }
+
         void Update()
         {
-            Check_Movement();
-            Check_Jump();
-            Check_Dash();
-
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (canCheck)
             {
-                Time.timeScale = 0 == 0? 1 : 0;
+                Check_Movement();
+                Check_Jump();
+                Check_Dash(); 
             }
+        }
+
+        private void OnEnable()
+        {
+            menuManager.onEnteredMenu += Disable_Inputs;
+            menuManager.onExitedMenu += Enable_Inputs;
+        }
+
+        private void OnDisable()
+        {
+            menuManager.onEnteredMenu -= Disable_Inputs;
+            menuManager.onExitedMenu -= Enable_Inputs;
         }
 
         private void Check_Dash()
@@ -83,5 +106,8 @@ namespace Xolito.Core
 
             }
         }
+
+        private void Disable_Inputs() => canCheck = false;
+        private void Enable_Inputs() => canCheck = true;
     }
 }

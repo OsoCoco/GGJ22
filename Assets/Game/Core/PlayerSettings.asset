@@ -21,3 +21,14 @@ MonoBehaviour:
   dashSpeed: 20
   dashTime: 0.6
   dashCoolDown: 2
+  audios:
+  - clip: {fileID: 8300000, guid: 1b9912a70cbfed2499daf37ad64a3304, type: 3}
+    action: 5
+  - clip: {fileID: 8300000, guid: 1420ce24a2bac844cb680a383d0560e8, type: 3}
+    action: 3
+  - clip: {fileID: 8300000, guid: 29b4e40e4dda6e4429b875a2f5c61c86, type: 3}
+    action: 4
+  - clip: {fileID: 8300000, guid: 6ab43c4de42186a4caa180bed6b38c73, type: 3}
+    action: 2
+  - clip: {fileID: 8300000, guid: d80ff4da9c6e2c54fbc6b6cd4f4594b2, type: 3}
+    action: 6

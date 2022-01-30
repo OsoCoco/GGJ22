@@ -1,35 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+//using TMPro;
+using Xolito.Utilities;
+using System;
+using UnityEngine.SceneManagement;
+using Xolito.UI;
 
-public class MenuManager : MonoBehaviour
+namespace Xolito.Core
 {
-
-    public GameObject mainMenu;
-    public GameObject credits;
-    public GameObject pause;
-
- 
-    public void StartGame()
+    public class MenuManager : MonoBehaviour
     {
-        mainMenu.SetActive(false);
-    }
+        public GameObject mainMenu;
+        public GameObject credits;
+        public GameObject pause;
+        [SerializeField] float pauseCooldown = 2;
+        bool canPause = false;
+        Fade fade;
+        //public currentMenu;
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
+        public event Action onEnteredMenu;
+        public event Action onExitedMenu;
 
-    public void OpenCredits()
-    {
-        credits.SetActive(true);
-        mainMenu.SetActive(false);
-    }
+        private void Awake()
+        {
+            fade = GameObject.FindObjectOfType<Fade>();
+        }
 
-    public void BackToMenu()
-    {
-        credits.SetActive(false);
-        mainMenu.SetActive(true);
-    }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Pause();
+                print("pause");
+            }
+        }
+
+        public void StartGame()
+        {
+            mainMenu.SetActive(false);
+            SceneManager.LoadScene(1);
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
+        public void OpenCredits()
+        {
+            credits.SetActive(true);
+            mainMenu.SetActive(false);
+        }
+
+        public void BackToMenu()
+        {
+            credits.SetActive(false);
+            mainMenu.SetActive(true);
+        }
+
+        public void Pause()
+        {
+            if (canPause)
+            {
+                if (mainMenu.activeSelf)
+                    mainMenu.SetActive(false);
+                else if (credits.activeSelf)
+                    return;
+
+                pause.SetActive(!pause.activeSelf);
+                Utilities.Utilities.StopTime();
+                //fade.FadeIn();
+
+                onEnteredMenu();
+                StartCoroutine(DisablePause());
+            }
+        }
+
+        IEnumerator DisablePause()
+        {
+            canPause = false;
+            yield return new WaitForSecondsRealtime(pauseCooldown);
+
+            canPause = true;
+        }
+    } 
 }
