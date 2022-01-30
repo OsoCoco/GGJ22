@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: fbca1c817c569064c9260d49cae51d94
+guid: 08269f4ef840e5a41a2abbe6babab503
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -1603031788722485042
+    second: dashL_0
+  - first:
+      213: 7906053091458744329
+    second: dashL_1
+  - first:
+      213: -2405339975876012062
+    second: dashL_2
+  - first:
+      213: -7241724859756076715
+    second: dashL_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,7 +101,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: dashL_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1584
+        width: 415
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec88985d413e0c9e0800000000000000
+      internalID: -1603031788722485042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashL_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1077
+        width: 426
+        height: 405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90007cb0661f7bd60800000000000000
+      internalID: 7906053091458744329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashL_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 576
+        width: 469
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e71dd539048e9ed0800000000000000
+      internalID: -2405339975876012062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashL_3
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 48
+        width: 426
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551af1dbb99308b90800000000000000
+      internalID: -7241724859756076715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
