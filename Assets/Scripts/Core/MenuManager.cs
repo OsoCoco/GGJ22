@@ -32,7 +32,6 @@ namespace Xolito.Core
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Pause();
-                print("pause");
             }
         }
 
@@ -63,11 +62,13 @@ namespace Xolito.Core
         {
             if (canPause)
             {
+                print("pause");
                 if (mainMenu.activeSelf)
                     mainMenu.SetActive(false);
                 else if (credits.activeSelf)
                     return;
 
+                print("pause");
                 pause.SetActive(!pause.activeSelf);
                 Utilities.Utilities.StopTime();
                 //fade.FadeIn();

@@ -21,6 +21,18 @@ namespace Xolito.Movement
         public bool isGrounded = false;
         (bool isTouchingWall, bool isAtRight) wallDetection;
 
+        //GroundCheck
+        public bool isBesidePlatform = false;
+        public bool isWallRight = false;
+        private Vector2 lowVectorPlayer = Vector2.zero;
+        private Vector2 normalizedVectorPlayer = Vector2.zero;
+        private Vector2 centreVectorPlayer = Vector2.zero;
+        private Vector2 centreWall = Vector2.zero;
+        private float sizeXWall = 0;
+        public float angleOfContact = 0;
+        private float sizeXPlayer = 0;
+        private bool isTouchingTheWall = false;
+
         bool canJump = true;
         bool testJump = false;
 
@@ -73,25 +85,28 @@ namespace Xolito.Movement
         {
             if (!isGrounded || inDash || !canJump) return false;
 
-            float? distance = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
+            //rgb2d.AddForce(Vector2.up * pSettings.JumpForce, ForceMode2D.Impulse);
+            rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            if (colliderToAvoid)
-            {
-                //AUDIO
-                //source.PlayOneShot(manager1.jump);
+            //float? distance = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
 
-                //Debug.Log("Jumping");
+            //if (colliderToAvoid)
+            //{
+            //    //AUDIO
+            //    //source.PlayOneShot(manager1.jump);
 
-                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            //    //Debug.Log("Jumping");
 
-                Ignore_Collition();
-                return true;
-            }
+            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            if (!distance.HasValue)
-                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
-            else
-                return false;
+            //    Ignore_Collition();
+            //    return true;
+            //}
+
+            //if (!distance.HasValue)
+            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            //else
+            //    return false;
 
             return true;
         }
@@ -127,6 +142,71 @@ namespace Xolito.Movement
                     finalTarget = new Vector2(transform.position.x + finalDistance + (boxCollider.size.x * 2) * currentDirection.x, transform.position.y);
                 return finalTarget;
             }
+        }
+
+        private void Check_Collitions()
+        {
+            ContactFilter2D filtro = new ContactFilter2D();
+            filtro.useLayerMask = false;
+            List<Collider2D> lista = new List<Collider2D>();
+
+            gameObject.GetComponent<Collider2D>().OverlapCollider(filtro, lista);
+            WalkingAreaDetection(lista);
+        }
+
+        void WalkingAreaDetection(List<Collider2D> lista)
+        {
+            isGrounded = false;
+            isTouchingTheWall = false;
+            isBesidePlatform = false;
+
+            foreach (Collider2D wall in lista)
+            {
+                centreWall = wall.bounds.center;
+                sizeXWall = wall.bounds.size.x / 2.0f;
+                angleOfContact = Vector2.Dot(normalizedVectorPlayer, (wall.bounds.center - wall.bounds.min).normalized);
+
+                if (angleOfContact < -.7f)
+                {
+                    if (centreVectorPlayer.x < wall.transform.position.x) //revisa si el jugador éstá a la izquierda o derecha del objeto
+                    {
+                        if (centreVectorPlayer.x + sizeXPlayer <= centreWall.x - sizeXWall) //revisa si el jugador está encima del objeto
+                        {
+                            isBesidePlatform = true;
+                            isWallRight = true;
+                        }
+                        else
+                        {
+                            isGrounded = true;
+                        }
+                    }
+                    else
+                    {
+                        if (centreVectorPlayer.x - sizeXPlayer >= centreWall.x + sizeXWall)
+                        {
+                            isBesidePlatform = true;
+                            isWallRight = false;
+                        }
+                        else
+                        {
+                            isGrounded = true;
+                        }
+                    }
+                }
+                else
+                {
+                    isTouchingTheWall = true;
+                    if (centreVectorPlayer.x < wall.transform.position.x)
+                        isWallRight = true;
+                    else
+                        isWallRight = false;
+                }
+            }
+        }
+
+        void Movement()
+        {
+            
         }
 
         void Check_Ground()
