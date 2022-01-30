@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7736239520995256049, guid: 672710f459c34564d80fea1506678ea8, type: 3}
+  - {fileID: 371812008374953323, guid: 261be6ee8754eea42a8d75bb86a8d87a, type: 3}
   tagsToAvoid:
   - Platform
   speed: 5
