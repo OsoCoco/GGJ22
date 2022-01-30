@@ -6921,7 +6921,7 @@ GameObject:
   - component: {fileID: 1012490967}
   m_Layer: 0
   m_Name: PlatformNegra (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7250,7 +7250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.5
+      value: -7.51
       objectReference: {fileID: 0}
     - target: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8680,7 +8680,7 @@ GameObject:
   - component: {fileID: 1837140021}
   m_Layer: 0
   m_Name: PlatformNegra (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9120,8 +9120,16 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3049435978712805696, guid: b955493437f2d2f4db7e7a5d6516af3f, type: 3}
+      propertyPath: dashTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049435978712805696, guid: b955493437f2d2f4db7e7a5d6516af3f, type: 3}
       propertyPath: jumpForce
       value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049435978712805696, guid: b955493437f2d2f4db7e7a5d6516af3f, type: 3}
+      propertyPath: jumpCoolDown
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3049435978712805696, guid: b955493437f2d2f4db7e7a5d6516af3f, type: 3}
       propertyPath: players.Array.data[0]
