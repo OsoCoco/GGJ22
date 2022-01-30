@@ -288,7 +288,7 @@ namespace Xolito.Movement
 
                     if (hit.transform.gameObject == gameObject) continue;
 
-                    if (Vector2.Angle(direction * -1, hit.normal) < 30)
+                    if (Vector2.Angle(direction * -1, hit.normal) < 80)
                     {
                         return direction.x != 0 ? hit.distance * direction.x : hit.distance * direction.y;
                     }
@@ -352,6 +352,9 @@ namespace Xolito.Movement
 
             dashVelocity = default;
             inDash = false;
+
+
+            this.GetComponent<Animator>().SetBool("isDashing", false);
             Clear_XVelocity();
             FreezeVerticalPosition(false);
             yield break;

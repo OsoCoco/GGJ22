@@ -14,7 +14,7 @@ namespace Xolito.Core
         private bool canCheck = false;
 
         #endregion
-        
+
         #region Variables
         [Header("References")]
         [SerializeField] PlayerController[] players = default;
@@ -37,7 +37,7 @@ namespace Xolito.Core
             {
                 Check_Movement();
                 Check_Jump();
-                Check_Dash(); 
+                Check_Dash();
             }
         }
 
@@ -79,18 +79,25 @@ namespace Xolito.Core
         {
             xDirection = Input.GetAxisRaw("Horizontal");
 
+
             if (xDirection != 0)
             {
-
                 try
                 {
                     players[0]?.InteractWith_Movement(xDirection);
                     players[1]?.InteractWith_Movement(-xDirection);
+
+
                 }
                 catch (System.Exception)
                 {
 
                 }
+            }
+            else
+            {
+                players[0]?.animatorXolos.SetBool("isMoving", false);
+                players[1]?.animatorXolos.SetBool("isMoving", false);
             }
         }
 

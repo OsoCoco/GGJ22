@@ -15,7 +15,7 @@ namespace Xolito.Control
         #endregion
 
         #region variables
-        [SerializeField] Animator animatorXolos;
+        public Animator animatorXolos;
         [SerializeField] PlayerSettings pSettings = null;
         Movement.Mover mover;
         #endregion
@@ -31,6 +31,8 @@ namespace Xolito.Control
         {
             
         }
+
+      
         #endregion
 
         #region Public methods
@@ -38,6 +40,22 @@ namespace Xolito.Control
         {
             if (mover.InteractWith_Movement(direction))
             {
+
+                if(direction != 0)
+                {
+                    //Debug.Log("Direction " + direction);
+                    animatorXolos.SetBool("isMoving",true);
+
+                    if(direction < 0)
+                    {
+                        this.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else 
+                    {
+                        this.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+                }
+                  
                 //animatorXolos.SetInteger(0, (int)direction);
                 //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Walk));
             }
@@ -47,7 +65,7 @@ namespace Xolito.Control
         {
             if (mover.Dash())
             {
-                //animatorXolos.SetBool(0, true);
+                animatorXolos.SetBool("isDashing", true);
                 //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Dash));
             }
         }
@@ -56,7 +74,9 @@ namespace Xolito.Control
         {
             if (mover.Jump())
             {
-                //animatorXolos.SetBool(0, false);
+                animatorXolos.SetTrigger("jump");
+
+                
                 source.PlayOneShot(pSettings.Get_Audio(BasicActions.Jump));
             }
         }
