@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 23dca99f8e9a0394daa31242960edbaa
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4989172085703999895
+    second: dashR_0
+  - first:
+      213: 8673772110645691174
+    second: dashR_1
+  - first:
+      213: 7804383552517000587
+    second: dashR_2
+  - first:
+      213: 6493467617076937512
+    second: dashR_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 536
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +125,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: dashR_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1584
+        width: 415
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e715cfb66e2cab0800000000000000
+      internalID: -4989172085703999895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashR_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 1077
+        width: 426
+        height: 405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6230abd67cd6f5870800000000000000
+      internalID: 8673772110645691174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashR_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 576
+        width: 469
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d4daadd7dbe4c60800000000000000
+      internalID: 7804383552517000587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashR_3
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 48
+        width: 426
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8238f54d46e6d1a50800000000000000
+      internalID: 6493467617076937512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

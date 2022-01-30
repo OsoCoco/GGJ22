@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: 2210263c9d5a4a244b4569286358fff9
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5468208261942256027
+    second: jumpR_0
+  - first:
+      213: -8112823570511562932
+    second: jumpR_1
+  - first:
+      213: 6339610268315115653
+    second: jumpR_2
+  - first:
+      213: 1515288274077932368
+    second: jumpR_3
+  - first:
+      213: 2090643965637816527
+    second: jumpR_4
+  - first:
+      213: 3003883435164179256
+    second: jumpR_5
+  - first:
+      213: 305526352405388387
+    second: jumpR_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -46,7 +67,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 536
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +134,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: jumpR_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 3108
+        width: 395
+        height: 437
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e531dbe850d14b0800000000000000
+      internalID: -5468208261942256027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_1
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 2602
+        width: 406
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c47fd3a32f5796f80800000000000000
+      internalID: -8112823570511562932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 2067
+        width: 406
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 580675943f1daf750800000000000000
+      internalID: 6339610268315115653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_3
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 1556
+        width: 450
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05bdabc28a2670510800000000000000
+      internalID: 1515288274077932368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_4
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 1050
+        width: 406
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0f7ab2c95730d10800000000000000
+      internalID: 2090643965637816527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_5
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 549
+        width: 395
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83b14aba110ffa920800000000000000
+      internalID: 3003883435164179256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpR_6
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 42
+        width: 418
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36cd4a849927d3400800000000000000
+      internalID: 305526352405388387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

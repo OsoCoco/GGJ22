@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: b10f203cd1774484f9a0003d960a96fe
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3874136907302192172
+    second: idleR_0
+  - first:
+      213: 47129390018674617
+    second: idleR_1
+  - first:
+      213: 8485391297674294802
+    second: idleR_2
+  - first:
+      213: -8452367613835170338
+    second: idleR_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 536
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +125,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: idleR_0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 1586
+        width: 393
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c244afabdf2b3c530800000000000000
+      internalID: 3874136907302192172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idleR_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 1085
+        width: 393
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf3b863eef67a000800000000000000
+      internalID: 47129390018674617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idleR_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 560
+        width: 393
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 216311e7d6a22c570800000000000000
+      internalID: 8485391297674294802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idleR_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 38
+        width: 393
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edda652107823ba80800000000000000
+      internalID: -8452367613835170338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
