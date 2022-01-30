@@ -41,14 +41,14 @@ namespace Xolito.Core
             currentLevel = level;
         }
 
-        public bool Change_FirstLevel()
+        public void Change_FirstLevel()
         {
             SceneManager.LoadScene(0);
 
-            return true;
+         
         }
 
-        public bool Restart_Level()
+        public void Restart_Level()
         {
             foreach (GameObject coin in coins)
             {
@@ -57,7 +57,7 @@ namespace Xolito.Core
 
             manager1.Respawn(startPointUp.transform.position, startPointDown.transform.position);
 
-            return true;
+           ;
         }
 
         public void Add_Coin()

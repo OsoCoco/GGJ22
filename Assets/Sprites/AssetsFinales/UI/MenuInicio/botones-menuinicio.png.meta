@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: 6efd7cd4d60b184498575a30898ff2ff
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6520876655983633907
+    second: botones-menuinicio_0
+  - first:
+      213: 8483251754324530488
+    second: botones-menuinicio_1
+  - first:
+      213: -3165691085380876736
+    second: botones-menuinicio_2
+  - first:
+      213: 5998618461696809700
+    second: botones-menuinicio_3
+  - first:
+      213: -2131448967909892285
+    second: botones-menuinicio_4
+  - first:
+      213: 1943179546819221863
+    second: botones-menuinicio_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,7 +107,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: botones-menuinicio_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 514
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0a55fffa313185a0800000000000000
+      internalID: -6520876655983633907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botones-menuinicio_1
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 336
+        width: 514
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83519bc36809ab570800000000000000
+      internalID: 8483251754324530488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botones-menuinicio_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 175
+        width: 513
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 046804bfab43114d0800000000000000
+      internalID: -3165691085380876736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botones-menuinicio_3
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 173
+        width: 514
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ead98875bf5f3350800000000000000
+      internalID: 5998618461696809700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botones-menuinicio_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 513
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34f9bd2e4729b62e0800000000000000
+      internalID: -2131448967909892285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botones-menuinicio_5
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 15
+        width: 514
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769d6fe908f87fa10800000000000000
+      internalID: 1943179546819221863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

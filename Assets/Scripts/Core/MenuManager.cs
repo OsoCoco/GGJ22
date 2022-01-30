@@ -15,7 +15,7 @@ namespace Xolito.Core
         public GameObject credits;
         public GameObject pause;
         [SerializeField] float pauseCooldown = 2;
-        bool canPause = false;
+        bool canPause = true;
         Fade fade;
         //public currentMenu;
 

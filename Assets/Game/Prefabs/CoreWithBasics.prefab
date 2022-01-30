@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 8756494924772869080}
     - target: {fileID: 8897894238878285189, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
       propertyPath: m_Name
-      value: CharactersController
+      value: CoreWithBasics
       objectReference: {fileID: 0}
     - target: {fileID: 8897894238878285243, guid: 46017d1f75b08824c8aca9b883d7b333, type: 3}
       propertyPath: m_RootOrder
@@ -545,6 +545,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09ef3027f0c8f6841acfc7667fae42c1, type: 3}
+--- !u!114 &5180897497778969858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1211765008213960811, guid: 09ef3027f0c8f6841acfc7667fae42c1, type: 3}
+  m_PrefabInstance: {fileID: 6284547922206143849}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353d108d344353a48974118e29611bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6630653974353443365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -617,6 +628,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3049435978712805759}
     m_Modifications:
+    - target: {fileID: 1295740695793794415, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_Name
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929053077236292122, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5180897497778969858}
+    - target: {fileID: 1929053077236292122, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart_Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929053077236292122, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Xolito.Core.LevelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955722341632497279, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_Name
+      value: Continue
+      objectReference: {fileID: 0}
     - target: {fileID: 1955722342242297008, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
       propertyPath: m_Name
       value: MenusManager
@@ -704,6 +735,26 @@ PrefabInstance:
     - target: {fileID: 1955722342242297012, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131658540077804330, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_Name
+      value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764818341836576642, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5180897497778969858}
+    - target: {fileID: 4764818341836576642, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Change_FirstLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764818341836576642, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Xolito.Core.LevelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483341113212402805, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}
+      propertyPath: m_Name
+      value: Restart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c766c3cf85ca2474cb6fdcdbb428e902, type: 3}

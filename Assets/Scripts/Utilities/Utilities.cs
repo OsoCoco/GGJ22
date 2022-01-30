@@ -35,6 +35,12 @@ namespace Xolito.Utilities
             return founded;
         }
 
-        public static void StopTime(bool shouldStop = true) => Time.timeScale = shouldStop? 0 : 1;
+        public static void StopTime(bool shouldStop ) => Time.timeScale = shouldStop? 0 : 1;
+
+        public static void StopTime()
+        {
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        }
+
     } 
 }
