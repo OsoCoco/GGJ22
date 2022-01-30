@@ -13,6 +13,7 @@ public class PlayerManager1 : MonoBehaviour
     [SerializeField] float jumpForce = 5;
     [SerializeField] float jumpCoolDown = 1f;
     [SerializeField] float dashDistance = 5;
+    [SerializeField] float dashSpeed = 5;
     [SerializeField] float dashTime = 3;
     float xDirection = 0;
 
@@ -20,6 +21,7 @@ public class PlayerManager1 : MonoBehaviour
     public float JumpForce { get => jumpForce; }
     public float JumpCoolDown { get => jumpCoolDown; }
     public float DashDistance { get => dashDistance; }
+    public float DashSpeed { get => dashSpeed; }
     public float DashTime { get => dashTime; }
     public List<string> TagsToAvoid { get => tagsToAvoid; }
 
@@ -28,9 +30,16 @@ public class PlayerManager1 : MonoBehaviour
         xDirection = Input.GetAxisRaw("Horizontal");
 
         if (xDirection != 0){
-            
-            players[0]?.InteractWith_Movement(xDirection);
-            //players[1]?.InteractWith_Movement(-xDirection);
+
+            try
+            {
+                players[0]?.InteractWith_Movement(xDirection);
+                players[1]?.InteractWith_Movement(-xDirection);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         if (Input.GetButton("Jump"))
