@@ -11,7 +11,7 @@ namespace Xolito.Utilities
             if (direction == Vector2.right)
                 return 0;
             else if (direction == Vector2.left)
-                return 270;
+                return 180;
             else if (direction == Vector2.up)
                 return 90;
             else if (direction == Vector2.down)

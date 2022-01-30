@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Xolito.Core
 {
-    [CreateAssetMenu(fileName = "Level", menuName = "Level/New Level list", order = 0)]
-    public class Levels : ScriptableObject
+    public class Levels : MonoBehaviour
     {
         [SerializeField] List<Level> levels;
         [SerializeField] GameObject counter;

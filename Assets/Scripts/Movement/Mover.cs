@@ -39,7 +39,6 @@ namespace Xolito.Movement
             //AUDIO
             manager1 = GetComponent<PlayerManager1>();
            
-
             rgb2d = GetComponent<Rigidbody2D>();
             boxCollider = GetComponent<BoxCollider2D>();
         }
@@ -54,7 +53,7 @@ namespace Xolito.Movement
             Check_Ground();
             Check_Wall();
 
-            float? test = Check_WayToMove(currentDirection, .1f, pSettings.TagsToAvoid);
+            float? test = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
             testJump = test.HasValue;
         }
 
@@ -84,22 +83,23 @@ namespace Xolito.Movement
 
             float? distance = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
 
-            if (distance.HasValue)
+            if (colliderToAvoid)
             {
-                if (colliderToAvoid)
-                {
-                    //AUDIO
-                    source.PlayOneShot(manager1.jump);
+                //AUDIO
+                //source.PlayOneShot(manager1.jump);
 
-                    //Debug.Log("Jumping");
+                //Debug.Log("Jumping");
 
-                    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
-          
-                    Ignore_Collition();
-                }    
-            }
-            else
                 rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+
+                Ignore_Collition();
+                return true;
+            }
+
+            if (!distance.HasValue)
+                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            else
+                return false;
 
             return true;
         }
@@ -159,11 +159,14 @@ namespace Xolito.Movement
 
         void Check_Wall()
         {
-            float? distance = Check_WayToMove(currentDirection, .1f, pSettings.TagsToAvoid);
+            float? distance = Check_WayToMove(currentDirection, isGrounded? .1f : .3f, pSettings.TagsToAvoid);
+
+            if (colliderToAvoid)
+                wallDetection.isTouchingWall = false;
 
             if (distance.HasValue && Mathf.Abs(distance.Value) <= 0)
                 wallDetection.isTouchingWall = true;
-            else
+            else if (!distance.HasValue)
                 wallDetection.isTouchingWall = false;
 
             wallDetection.isAtRight = (currentDirection.x >= 0);
@@ -171,7 +174,7 @@ namespace Xolito.Movement
 
         float Check_Dash()
         {
-            float? distance = Check_WayToMove(currentDirection, 1);
+            float? distance = Check_WayToMove(currentDirection, .1f);
 
             if (distance.HasValue)
                 return distance.Value;
@@ -193,7 +196,7 @@ namespace Xolito.Movement
 
             float angle = Utilities.Utilities.Get_AngleDirection(direction);
 
-            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, angle, direction, 1);
+            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, angle, direction, offset);
 
             if (hit2D.Length != 0)
             {
@@ -204,6 +207,7 @@ namespace Xolito.Movement
                         bool founded = Utilities.Utilities.Find_TagIn(tagsToAvoid, hit.transform.tag);
 
                         Check_Collider(hit, founded);
+                        if (founded) continue;
                     }
 
                     if (hit.transform.gameObject == gameObject) continue;
@@ -221,8 +225,8 @@ namespace Xolito.Movement
             {
                 if (founded && !colliderToAvoid)
                     colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
-                else if (founded && colliderToAvoid == hit.transform.GetComponent<BoxCollider2D>())
-                    colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
+                //else if (founded && colliderToAvoid == hit.transform.GetComponent<BoxCollider2D>())
+                //    colliderToAvoid = hit.transform.GetComponent<BoxCollider2D>();
                 else if (!founded && colliderToAvoid)
                     colliderToAvoid = default;
             }
@@ -233,7 +237,10 @@ namespace Xolito.Movement
         private void FreezeVerticalPosition(bool shouldFreeze = true)
         {
             if (shouldFreeze)
-                rgb2d.constraints = RigidbodyConstraints2D.FreezeRotation & RigidbodyConstraints2D.FreezePositionY;
+            {
+                rgb2d.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                //rgb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
 
             else if (!shouldFreeze)
                 rgb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -257,9 +264,8 @@ namespace Xolito.Movement
             transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, dashTime, pSettings.DashSpeed);
             float currentTime = 0;
 
-
             //AUDIO
-            source.PlayOneShot(manager1.dash);
+            //source.PlayOneShot(manager1.dash);
 
             while (currentTime < dashTime)
             {
