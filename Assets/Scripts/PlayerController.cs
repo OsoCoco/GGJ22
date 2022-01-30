@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     float JumpForce { get => manager1.JumpForce; }
     float JumpCoolDown { get => manager1.JumpCoolDown; }
     float DashDistance { get => manager1.DashDistance; }
+    float DashSpeed{ get => manager1.DashSpeed; }
     float DashTime { get => manager1.DashTime; }
     public List<string> TagsToAvoid { get => manager1.TagsToAvoid; } 
     #endregion
@@ -228,15 +229,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private float Get_AngleDirection(Vector2 direction)
-    //{
-    //    switch (direction)
-    //    {
-    //        case Vector2.up:
+    private float Get_AngleDirection(Vector2 direction)
+    {
+        if (direction == Vector2.up)
+            return 90; ;
 
-    //            break;
-    //    }
-    //}
+        return 0;
+    }
 
     private bool Find_TagIn(List<string> tagsToAvoid, string tagToFind)
     {
@@ -270,12 +269,12 @@ public class PlayerController : MonoBehaviour
         inDash = true;
         FreezeVerticalPosition();
 
-        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
+        transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, DashSpeed);
         float curentTime = 0;
 
         while (curentTime < DashTime)
         {
-            transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, Speed);
+            transform.position = Vector2.SmoothDamp(transform.position, final, ref dashVelocity, DashTime, DashSpeed);
             yield return new WaitForEndOfFrame();
             curentTime += Time.deltaTime;
         }
