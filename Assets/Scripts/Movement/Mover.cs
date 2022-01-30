@@ -24,14 +24,14 @@ namespace Xolito.Movement
 
         Vector2 dashVelocity = default;
         Vector2 currentDirection = default;
-        bool inDash = false;
+        public bool inDash = false;
         public bool isGrounded = false;
         (bool isTouchingWall, bool isAtRight) wallDetection;
 
-        public bool canJump = true;
-        public bool testJump = false;
+        bool canJump = true;
+        bool testJump = false;
 
-        bool canDash = false;
+        public bool canDash = false;
         #endregion
 
         private void Awake()
@@ -46,6 +46,7 @@ namespace Xolito.Movement
         private void Start()
         {
             canJump = true;
+            canDash = true;
         }
 
         private void Update()
@@ -53,8 +54,8 @@ namespace Xolito.Movement
             Check_Ground();
             Check_Wall();
 
-            float? test = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
-            testJump = test.HasValue;
+            float? test = Check_WayToMove(Vector2.down);
+            testJump = colliderToAvoid;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -106,7 +107,7 @@ namespace Xolito.Movement
 
         public bool Dash()
         {
-            if (inDash && !canDash)
+            if (inDash || !canDash)
                 return false;
 
             float finalDistance = Check_Dash();
@@ -121,6 +122,8 @@ namespace Xolito.Movement
             {
                 StartCoroutine(DashTo(finalTarget, Mathf.Abs((finalDistance / pSettings.DashDistance) * pSettings.DashTime)));
             }
+
+            StartCoroutine(Disable_Dash());
 
             return true;
 
@@ -137,21 +140,23 @@ namespace Xolito.Movement
 
         void Check_Ground()
         {
-            float? distance = Check_WayToMove(Vector2.down);
+            float? distance = Check_WayToMove(Vector2.down, isGrounded? .1f : .3f);
 
             if (distance.HasValue)
             {
                 //if (!isGrounded && canJump)
                 //    StartCoroutine(Disable_Jump());
 
-                if (distance.Value <= .5f && !isGrounded)
+                if (distance.Value <= .5f)
                 {
                     isGrounded = true;
                     StartCoroutine(Disable_Jump());
                 }
 
-                if (colliderToAvoid)
+                if (colliderToAvoid && (boxCollider.transform.position.y - boxCollider.bounds.extents.y) > (colliderToAvoid.transform.position.y + colliderToAvoid.bounds.extents.y))
                     Ignore_Collition(false);
+
+                //if ()
             }
             else
                 isGrounded = false;
@@ -278,8 +283,6 @@ namespace Xolito.Movement
             inDash = false;
             Clear_XVelocity();
             FreezeVerticalPosition(false);
-
-            StartCoroutine(Disable_Dash());
             yield break;
         }
 

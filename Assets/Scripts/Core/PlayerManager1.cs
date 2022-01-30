@@ -9,6 +9,7 @@ namespace Xolito.Core
     {
         #region AUDIO //Borrar si rompe algo
         public AudioClip jump, dash;
+
         #endregion
         
         #region Variables
@@ -22,6 +23,11 @@ namespace Xolito.Core
             Check_Movement();
             Check_Jump();
             Check_Dash();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Time.timeScale = 0 == 0? 1 : 0;
+            }
         }
 
         private void Check_Dash()
@@ -62,6 +68,19 @@ namespace Xolito.Core
                 {
 
                 }
+            }
+        }
+
+        public void Respawn(Vector3 start1, Vector3 start2)
+        {
+            try
+            {
+                players[0].transform.position = start1;
+                players[1].transform.position = start2;
+            }
+            catch (System.Exception)
+            {
+
             }
         }
     }

@@ -15,9 +15,18 @@ MonoBehaviour:
   tagsToAvoid:
   - Platform
   speed: 2.5
+<<<<<<< HEAD
   jumpForce: 3.7
   jumpCoolDown: 0.3
+=======
+  jumpForce: 7
+  jumpCoolDown: 0.1
+>>>>>>> 9af98a79bf6d6a6daa3708caac02d6bf1539e003
   dashDistance: 2
   dashSpeed: 10
   dashTime: 0.2
+<<<<<<< HEAD
   dashCoolDown: 2
+=======
+  dashCoolDown: 3
+>>>>>>> 9af98a79bf6d6a6daa3708caac02d6bf1539e003
