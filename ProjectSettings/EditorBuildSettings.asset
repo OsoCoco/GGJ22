@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: ed5cbf39e3998734c8131dc56fce2f4c
   - enabled: 1
-    path: Assets/Scenes/WakzTest.unity
+    path: Assets/Scenes/Level1.unity
     guid: fbac789883a086d44906d69fef60e00e
   m_configObjects: {}
