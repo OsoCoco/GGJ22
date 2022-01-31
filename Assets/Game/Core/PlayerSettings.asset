@@ -16,7 +16,7 @@ MonoBehaviour:
   - Platform
   speed: 2.5
   jumpForce: 3.7
-  jumpCoolDown: 2
+  jumpCoolDown: 0.1
   dashDistance: 2
   dashSpeed: 20
   dashTime: 0.6

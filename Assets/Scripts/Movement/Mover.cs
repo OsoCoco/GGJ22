@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Xolito.Control;
 using Xolito.Core;
+using static Xolito.Utilities.Utilities;
 
 namespace Xolito.Movement
 {
@@ -24,16 +25,9 @@ namespace Xolito.Movement
         //GroundCheck
         public bool isBesidePlatform = false;
         public bool isWallRight = false;
-        private Vector2 lowVectorPlayer = Vector2.zero;
-        private Vector2 normalizedVectorPlayer = Vector2.zero;
-        private Vector2 centreVectorPlayer = Vector2.zero;
-        private Vector2 centreWall = Vector2.zero;
-        private float sizeXWall = 0;
         public float angleOfContact = 0;
-        private float sizeXPlayer = 0;
-        private bool isTouchingTheWall = false;
 
-        bool canJump = true;
+        public bool canJump = true;
         bool testJump = false;
 
         public bool canDash = false;
@@ -54,17 +48,27 @@ namespace Xolito.Movement
 
         private void Update()
         {
-            Check_Ground();
-            Check_Wall();
+            if (isGrounded)
+                Check_Ground();
+            else
+                Check_GoundWithLines();
+            //Check_GoundWithLines();
+            //Check_Ground();
 
-            float? test = Check_WayToMove(Vector2.down);
-            testJump = colliderToAvoid;
+
+            Check_Wall();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (colliderToAvoid)
                 Ignore_Collition();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawCube(transform.position + Vector3.up, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
+            //Gizmos.DrawWireCube(transform.position + Vector3.up * 1.5f, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
         }
 
         public bool InteractWith_Movement(float direction)
@@ -86,27 +90,27 @@ namespace Xolito.Movement
             if (!isGrounded || inDash || !canJump) return false;
 
             //rgb2d.AddForce(Vector2.up * pSettings.JumpForce, ForceMode2D.Impulse);
-            rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            //rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            //float? distance = Check_WayToMove(Vector2.up, .5f, pSettings.TagsToAvoid);
+            float? distance = Check_WayToMove(Vector2.up , 1, .1f, pSettings.TagsToAvoid);
 
-            //if (colliderToAvoid)
-            //{
-            //    //AUDIO
-            //    //source.PlayOneShot(manager1.jump);
+            if (colliderToAvoid)
+            {
+                //AUDIO
+                //source.PlayOneShot(manager1.jump);
 
-            //    //Debug.Log("Jumping");
+                //Debug.Log("Jumping");
 
-            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            //    Ignore_Collition();
-            //    return true;
-            //}
+                Ignore_Collition();
+                return true;
+            }
 
-            //if (!distance.HasValue)
-            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
-            //else
-            //    return false;
+            if (!distance.HasValue)
+                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            else
+                return false;
 
             return true;
         }
@@ -144,81 +148,17 @@ namespace Xolito.Movement
             }
         }
 
-        private void Check_Collitions()
-        {
-            ContactFilter2D filtro = new ContactFilter2D();
-            filtro.useLayerMask = false;
-            List<Collider2D> lista = new List<Collider2D>();
-
-            gameObject.GetComponent<Collider2D>().OverlapCollider(filtro, lista);
-            WalkingAreaDetection(lista);
-        }
-
-        void WalkingAreaDetection(List<Collider2D> lista)
-        {
-            isGrounded = false;
-            isTouchingTheWall = false;
-            isBesidePlatform = false;
-
-            foreach (Collider2D wall in lista)
-            {
-                centreWall = wall.bounds.center;
-                sizeXWall = wall.bounds.size.x / 2.0f;
-                angleOfContact = Vector2.Dot(normalizedVectorPlayer, (wall.bounds.center - wall.bounds.min).normalized);
-
-                if (angleOfContact < -.7f)
-                {
-                    if (centreVectorPlayer.x < wall.transform.position.x) //revisa si el jugador éstá a la izquierda o derecha del objeto
-                    {
-                        if (centreVectorPlayer.x + sizeXPlayer <= centreWall.x - sizeXWall) //revisa si el jugador está encima del objeto
-                        {
-                            isBesidePlatform = true;
-                            isWallRight = true;
-                        }
-                        else
-                        {
-                            isGrounded = true;
-                        }
-                    }
-                    else
-                    {
-                        if (centreVectorPlayer.x - sizeXPlayer >= centreWall.x + sizeXWall)
-                        {
-                            isBesidePlatform = true;
-                            isWallRight = false;
-                        }
-                        else
-                        {
-                            isGrounded = true;
-                        }
-                    }
-                }
-                else
-                {
-                    isTouchingTheWall = true;
-                    if (centreVectorPlayer.x < wall.transform.position.x)
-                        isWallRight = true;
-                    else
-                        isWallRight = false;
-                }
-            }
-        }
-
-        void Movement()
-        {
-            
-        }
-
         void Check_Ground()
         {
-            float? distance = Check_WayToMove(Vector2.down, isGrounded? .1f : .3f);
+            float? distance = default;
+            distance= Check_WayToMove(Vector2.down * .1f, .9f);
 
             if (distance.HasValue)
             {
                 //if (!isGrounded && canJump)
                 //    StartCoroutine(Disable_Jump());
 
-                if (distance.Value <= .5f)
+                if (distance.Value <= .1f)
                 {
                     isGrounded = true;
                     StartCoroutine(Disable_Jump());
@@ -233,9 +173,50 @@ namespace Xolito.Movement
                 isGrounded = false;
         }
 
+        void Check_GoundWithLines()
+        {
+             Vector3 startL = new Vector3()
+            {
+                x = transform.position.x - boxCollider.bounds.extents.x,
+                y = transform.position.y - boxCollider.bounds.extents.y,
+                z = transform.position.z
+            };
+
+            Vector3 startR = startL + Vector3.right * boxCollider.bounds.extents.x * 2f;
+
+            if (!Cast_Ground(startL))
+                Cast_Ground(startR);
+
+            bool Cast_Ground(Vector3 start)
+            {
+                RaycastHit2D[] hits;
+                Debug.DrawRay(start, Vector3.down * .2f, Color.red, .1f);
+
+                hits = Physics2D.RaycastAll(start, Vector3.down, .2f);
+
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.transform.name == transform.name) continue;
+
+                    if (boxCollider.transform.position.y - boxCollider.bounds.extents.y < hit.point.y)
+                        continue;
+
+                    if (colliderToAvoid == hit.collider)
+                        Ignore_Collition(false);
+
+                    isGrounded = true;
+                    StartCoroutine(Disable_Jump());
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         void Check_Wall()
         {
-            float? distance = Check_WayToMove(currentDirection, isGrounded? .1f : .3f, pSettings.TagsToAvoid);
+            float? distance = Check_WayToMove(currentDirection * .1f, .9f, .1f, pSettings.TagsToAvoid);
 
             if (colliderToAvoid)
                 wallDetection.isTouchingWall = false;
@@ -250,7 +231,7 @@ namespace Xolito.Movement
 
         float Check_Dash()
         {
-            float? distance = Check_WayToMove(currentDirection, .1f);
+            float? distance = Check_WayToMove(currentDirection * pSettings.DashDistance, .9f);
 
             if (distance.HasValue)
                 return distance.Value;
@@ -258,21 +239,13 @@ namespace Xolito.Movement
                 return pSettings.DashDistance * currentDirection.x;
         }
 
-        public float? Check_WayToMove(Vector2 direction, float offset = .1f, List<string> tagsToAvoid = null)
+        public float? Check_WayToMove(Vector2 finalPosition, float size, float offset = .1f, List<string> tagsToAvoid = null)
         {
             RaycastHit2D[] hit2D;
+            Vector3 startPosition = Get_VectorWithOffset(finalPosition, offset);
 
-            Vector2 offset1 = direction * offset;
-            Vector3 startPosition = new Vector3()
-            {
-                x = transform.position.x + direction.x * offset,
-                y = transform.position.y + direction.y * offset,
-                z = 0
-            };
-
-            float angle = Utilities.Utilities.Get_AngleDirection(direction);
-
-            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size, angle, direction, offset);
+            float angle = Get_Angle(finalPosition.normalized);
+            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size * size, angle, finalPosition, finalPosition.magnitude);
 
             if (hit2D.Length != 0)
             {
@@ -280,7 +253,7 @@ namespace Xolito.Movement
                 {
                     if (tagsToAvoid != null && tagsToAvoid.Count != 0)
                     {
-                        bool founded = Utilities.Utilities.Find_TagIn(tagsToAvoid, hit.transform.tag);
+                        bool founded = Find_TagIn(tagsToAvoid, hit.transform.tag);
 
                         Check_Collider(hit, founded);
                         if (founded) continue;
@@ -288,9 +261,10 @@ namespace Xolito.Movement
 
                     if (hit.transform.gameObject == gameObject) continue;
 
-                    if (Vector2.Angle(direction * -1, hit.normal) < 80)
+                    if (Vector2.Angle(finalPosition * -1, hit.normal) < 80)
                     {
-                        return direction.x != 0 ? hit.distance * direction.x : hit.distance * direction.y;
+                        float distance = finalPosition.x != 0 ? hit.distance * finalPosition.normalized.x : hit.distance * finalPosition.normalized.y;
+                        return distance;
                     }
                 }
             }
@@ -306,6 +280,17 @@ namespace Xolito.Movement
                 else if (!founded && colliderToAvoid)
                     colliderToAvoid = default;
             }
+        }
+
+        private Vector3 Get_VectorWithOffset(Vector2 finalPosition, float offset)
+        {
+            Vector3 startPosition = new Vector3()
+            {
+                x = transform.position.x + finalPosition.normalized.x * offset,
+                y = transform.position.y + finalPosition.normalized.y * offset,
+                z = 0
+            };
+            return startPosition;
         }
 
         private void Clear_XVelocity() => rgb2d.velocity = Vector2.zero;
@@ -324,10 +309,12 @@ namespace Xolito.Movement
 
         public void Ignore_Collition(bool shouldIgnore = true)
         {
+            if (!colliderToAvoid) return;
+
             Physics2D.IgnoreCollision(boxCollider, colliderToAvoid, shouldIgnore);
 
             if (!shouldIgnore)
-                colliderToAvoid = default;
+                colliderToAvoid = null;
         }
 
         #region Coroutines

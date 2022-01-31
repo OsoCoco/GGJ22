@@ -6,7 +6,7 @@ namespace Xolito.Utilities
 {
     public class Utilities
     {
-        public static float Get_AngleDirection(Vector2 direction)
+        public static float Get_Angle(Vector2 direction)
         {
             if (direction == Vector2.right)
                 return 0;
@@ -42,5 +42,20 @@ namespace Xolito.Utilities
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
         }
 
+        public static void DrawWireCube(Vector3 direction, float offset, float size)
+        {
+            Gizmos.DrawWireCube(Get_VectorWithOffset(direction, offset), new Vector3(size, size, 0));
+        }
+
+        private static Vector3 Get_VectorWithOffset(Vector3 direction, float offset)
+        {
+            Vector3 newStart = new Vector3()
+            {
+                x = direction.x + offset,
+                y = direction.y + offset,
+                z = 0
+            };
+            return newStart;
+        }
     } 
 }
