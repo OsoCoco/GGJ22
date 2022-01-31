@@ -65,6 +65,30 @@ namespace Xolito.Movement
                 Ignore_Collition();
         }
 
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+             if ((collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform")) && 
+                collision.GetContact(0).normal == Vector2.up)
+             {
+                isGrounded = true;
+             }
+        }
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if ((collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform"))
+                )
+            {
+                StartCoroutine(exitGround());
+            }
+
+        }
+
+        IEnumerator exitGround()
+        {
+            yield return new WaitForSeconds(0.2f);
+            isGrounded = false;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.DrawCube(transform.position + Vector3.up, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
@@ -176,7 +200,7 @@ namespace Xolito.Movement
         void Check_GoundWithLines()
         {
              Vector3 startL = new Vector3()
-            {
+             {
                 x = transform.position.x - boxCollider.bounds.extents.x,
                 y = transform.position.y - boxCollider.bounds.extents.y,
                 z = transform.position.z
