@@ -59,7 +59,7 @@ namespace Xolito.Core
             {
                 foreach (PlayerController player in players)
                 {
-                    player.InteractWith_Dash();
+                    player.Dash();
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace Xolito.Core
             {
                 foreach (PlayerController player in players)
                 {
-                    player.InteractWith_Jump();
+                    player.Jump();
                 }
             }
         }
@@ -84,8 +84,8 @@ namespace Xolito.Core
             {
                 try
                 {
-                    players[0]?.InteractWith_Movement(xDirection);
-                    players[1]?.InteractWith_Movement(-xDirection);
+                    players[0]?.Move(xDirection);
+                    players[1]?.Move(-xDirection);
 
 
                 }

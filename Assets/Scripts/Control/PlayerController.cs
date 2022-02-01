@@ -36,7 +36,7 @@ namespace Xolito.Control
         #endregion
 
         #region Public methods
-        public void InteractWith_Movement(float direction)
+        public void Move(float direction)
         {
             if (mover.InteractWith_Movement(direction))
             {
@@ -61,18 +61,18 @@ namespace Xolito.Control
             }
         }
 
-        public void InteractWith_Dash()
+        public void Dash()
         {
-            if (mover.Dash())
+            if (mover.InteractWithDash())
             {
                 animatorXolos.SetBool("isDashing", true);
                 //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Dash));
             }
         }
 
-        public void InteractWith_Jump()
+        public void Jump()
         {
-            if (mover.Jump())
+            if (mover.InteractWith_Jump())
             {
                 animatorXolos.SetTrigger("jump");
 
