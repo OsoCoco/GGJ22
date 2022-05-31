@@ -1,39 +1,123 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Xolito.Control;
 
-public class PlayerManager : MonoBehaviour
+namespace Xolito.Core
 {
-    [Header("Player Vairbales")]
-    [SerializeField] float speed;
-    [SerializeField] float gravityScale;
-    [SerializeField] float fallGravityScale;
-    [SerializeField] float jumpForce;
-
-
-    [Header("Player Ref")]
-    [SerializeField] Player player1, player2;
-    
-    bool isMoving;
-    Vector2 movement;
-
-
-    private void Update()
+    public class PlayerManager : MonoBehaviour
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        
-        movement = new Vector2(x, 0);
+        #region AUDIO //Borrar si rompe algo
+        MenuManager menuManager;
 
-        if(movement != Vector2.zero)
+
+        private bool canCheck = false;
+
+        #endregion
+
+        #region Variables
+        [Header("References")]
+        [SerializeField] PlayerController[] players = default;
+
+        float xDirection = 0;
+
+
+        #endregion
+
+        private void Awake()
         {
-            player1.Move(movement, speed);
-            player2.Move(-movement, speed);
+            menuManager = GameObject.FindObjectOfType<MenuManager>();
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        private void Start()
         {
-            player1.Jump(jumpForce);
-            player2.Jump(jumpForce);
+            canCheck = true;
         }
+
+        void Update()
+        {
+            if (canCheck)
+            {
+                Check_Movement();
+                Check_Jump();
+                Check_Dash();
+            }
+        }
+
+        private void OnEnable()
+        {
+            menuManager.onEnteredMenu += Disable_Inputs;
+            menuManager.onExitedMenu += Enable_Inputs;
+        }
+
+        private void OnDisable()
+        {
+            menuManager.onEnteredMenu -= Disable_Inputs;
+            menuManager.onExitedMenu -= Enable_Inputs;
+        }
+
+        private void Check_Dash()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                foreach (PlayerController player in players)
+                {
+                    player.Dash();
+                }
+            }
+        }
+
+        private void Check_Jump()
+        {
+            if (Input.GetButton("Jump"))
+            {
+                foreach (PlayerController player in players)
+                {
+                    player.Jump();
+                }
+            }
+        }
+
+        private void Check_Movement()
+        {
+            xDirection = Input.GetAxisRaw("Horizontal");
+
+
+            if (xDirection != 0)
+            {
+                try
+                {
+                    players[0]?.Move(xDirection);
+                    players[1]?.Move(-xDirection);
+
+
+                }
+                catch (System.Exception)
+                {
+
+                }
+            }
+            else
+            {
+                players[0]?.animatorXolos.SetBool("isMoving", false);
+                players[1]?.animatorXolos.SetBool("isMoving", false);
+            }
+        }
+
+        public void Respawn(Vector3 start1, Vector3 start2)
+        {
+            try
+            {
+                players[0].transform.position = start1;
+                players[1].transform.position = start2;
+            }
+            catch (System.Exception)
+            {
+
+            }
+        }
+
+        private void Disable_Inputs() => canCheck = false;
+        private void Enable_Inputs() => canCheck = true;
     }
 }

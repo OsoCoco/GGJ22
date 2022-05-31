@@ -225,7 +225,7 @@ PrefabInstance:
     - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: source
       value: 
-      objectReference: {fileID: 305014178375854326}
+      objectReference: {fileID: 305014178465875179}
     - target: {fileID: 6440591507710062974, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
       propertyPath: animatorXolos
       value: 
@@ -244,11 +244,6 @@ GameObject:
 --- !u!4 &7611169382144940908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6440591507710062962, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
-  m_PrefabInstance: {fileID: 3513333140420602398}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &305014178375854326 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3817501240840700648, guid: 6417040ca6a14a24dbe42717a33b2dfb, type: 3}
   m_PrefabInstance: {fileID: 3513333140420602398}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &3513333140420602396
