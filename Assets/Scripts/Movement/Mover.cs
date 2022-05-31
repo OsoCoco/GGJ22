@@ -55,10 +55,10 @@ namespace Xolito.Movement
             //else
             //    Check_GoundWithLines();
             //Check_GoundWithLines();
-            //Check_Ground();
+            Check_Ground();
 
 
-            //Check_Wall();
+            Check_Wall();
         }
 
         //private void OnCollisionEnter2D(Collision2D collision)
@@ -67,83 +67,83 @@ namespace Xolito.Movement
         //        Ignore_Collition();
         //}
 
-        private void OnCollisionStay2D(Collision2D collision)
-        {
-            try
-            {
-                if (collision.gameObject.CompareTag("Floor"))
-                {
-                    if (collision.GetContact(0).normal == Vector2.up)
-                    {
-                        isGrounded = true;
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.right)
-                        wallDetection = (true, true);
-                    else if (collision.GetContact(0).normal == Vector2.left)
-                        wallDetection = (true, false);
-                }
-                else if (collision.gameObject.CompareTag("Platform"))
-                {
-                    if (collision.GetContact(0).normal == Vector2.down)
-                    {
-                        Ignore_Collition(collision.collider, false);
-                        isGrounded = true;
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.right)
-                    {
-                        wallDetection = (true, true);
-                        Ignore_Collition(collision.collider, true);
-                        StartCoroutine(EnableCollition(collision.collider));
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.left)
-                    {
-                        wallDetection = (true, true);
-                        Ignore_Collition(collision.collider, true);
-                        StartCoroutine(EnableCollition(collision.collider));
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            try
-            {
-                if (collision.gameObject.CompareTag("Floor"))
-                {
-                    if (collision.GetContact(0).normal == Vector2.up)
-                    {
-                        StartCoroutine(ExitGround());
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.right)
-                        wallDetection = (false, true);
-                    else if (collision.GetContact(0).normal == Vector2.left)
-                        wallDetection = (false, false);
-                }
-                else if (collision.gameObject.CompareTag("Platform"))
-                {
-                    if (collision.GetContact(0).normal == Vector2.up)
-                    {
-                        //Ignore_Collition(collision.collider, false);
-                        //isGrounded = true;
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.right)
-                    {
-                        wallDetection = (false, true);
-                    }
-                    else if (collision.GetContact(0).normal == Vector2.left)
-                    {
-                        wallDetection = (false, true);
-                    }
-                }
-            }
-            catch (Exception)
-            {
+        //private void OnCollisionStay2D(Collision2D collision)
+        //{
+        //    try
+        //    {
+        //        if (collision.gameObject.CompareTag("Floor"))
+        //        {
+        //            if (collision.GetContact(0).normal == Vector2.up)
+        //            {
+        //                isGrounded = true;
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.right)
+        //                wallDetection = (true, true);
+        //            else if (collision.GetContact(0).normal == Vector2.left)
+        //                wallDetection = (true, false);
+        //        }
+        //        else if (collision.gameObject.CompareTag("Platform"))
+        //        {
+        //            if (collision.GetContact(0).normal == Vector2.down)
+        //            {
+        //                Ignore_Collition(collision.collider, false);
+        //                isGrounded = true;
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.right)
+        //            {
+        //                wallDetection = (true, true);
+        //                Ignore_Collition(collision.collider, true);
+        //                StartCoroutine(EnableCollition(collision.collider));
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.left)
+        //            {
+        //                wallDetection = (true, true);
+        //                Ignore_Collition(collision.collider, true);
+        //                StartCoroutine(EnableCollition(collision.collider));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //}
+        //private void OnCollisionExit2D(Collision2D collision)
+        //{
+        //    try
+        //    {
+        //        if (collision.gameObject.CompareTag("Floor"))
+        //        {
+        //            if (collision.GetContact(0).normal == Vector2.up)
+        //            {
+        //                StartCoroutine(ExitGround());
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.right)
+        //                wallDetection = (false, true);
+        //            else if (collision.GetContact(0).normal == Vector2.left)
+        //                wallDetection = (false, false);
+        //        }
+        //        else if (collision.gameObject.CompareTag("Platform"))
+        //        {
+        //            if (collision.GetContact(0).normal == Vector2.up)
+        //            {
+        //                //Ignore_Collition(collision.collider, false);
+        //                //isGrounded = true;
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.right)
+        //            {
+        //                wallDetection = (false, true);
+        //            }
+        //            else if (collision.GetContact(0).normal == Vector2.left)
+        //            {
+        //                wallDetection = (false, true);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void OnDrawGizmosSelected()
         {
@@ -156,14 +156,14 @@ namespace Xolito.Movement
         {
             if (inDash) return false;
 
-            //if (!wallDetection.isTouchingWall || (wallDetection.isTouchingWall && !((direction >= 0 && wallDetection.isAtRight) || direction < 0 && !wallDetection.isAtRight)))
-            //{
-            //    transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
-            //}
+            if (!wallDetection.isTouchingWall || (wallDetection.isTouchingWall && !((direction >= 0 && wallDetection.isAtRight) || direction < 0 && !wallDetection.isAtRight)))
+            {
+                transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
+            }
 
-            //currentDirection.x = direction > 0 ? 1 : -1;
+            currentDirection.x = direction > 0 ? 1 : -1;
 
-            transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
+            //transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
 
             return true;
         }
@@ -172,28 +172,28 @@ namespace Xolito.Movement
         {
             if (!isGrounded || inDash || !canJump) return false;
 
-            //rgb2d.AddForce(Vector2.up * pSettings.JumpForce, ForceMode2D.Impulse);
-            //rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            rgb2d.AddForce(Vector2.up * pSettings.JumpForce, ForceMode2D.Impulse);
+            rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            //float? distance = Check_WayToMove(Vector2.up , 1, .1f, pSettings.TagsToAvoid);
+            float? distance = Check_WayToMove(Vector2.up, 1, .1f, pSettings.TagsToAvoid);
 
-            //if (colliderToAvoid)
-            //{
-            //    //AUDIO
-            //    //source.PlayOneShot(manager1.jump);
+            if (colliderToAvoid)
+            {
+                //AUDIO
+                //source.PlayOneShot(manager1.jump);
 
-            //    //Debug.Log("Jumping");
+                //Debug.Log("Jumping");
 
-            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
 
-            //    Ignore_Collition();
-            //    return true;
-            //}
+                Ignore_Collition();
+                return true;
+            }
 
-            //if (!distance.HasValue)
-            //    rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
-            //else
-            //    return false;
+            if (!distance.HasValue)
+                rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+            else
+                return false;
 
             Jump();
 
@@ -330,18 +330,21 @@ namespace Xolito.Movement
                 return pSettings.DashDistance * currentDirection.x;
         }
 
-        public float? Check_WayToMove(Vector2 finalPosition, float size, float offset = .1f, List<string> tagsToAvoid = null)
+        public float? Check_WayToMove(Vector2 Destiny, float size, float offset = .1f, List<string> tagsToAvoid = null)
         {
             RaycastHit2D[] hit2D;
-            Vector3 startPosition = Get_VectorWithOffset(finalPosition, offset);
+            Vector3 startPosition = Get_VectorWithOffset(Destiny, offset);
+            Vector3 finalPosition = startPosition + new Vector3(Destiny.x, Destiny.y, 0);
 
-            float angle = Get_Angle(finalPosition.normalized);
-            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size * size, angle, finalPosition, finalPosition.magnitude);
+            float angle = Get_Angle(Destiny.normalized);
+            hit2D = Physics2D.BoxCastAll(startPosition, boxCollider.size * size, angle, finalPosition, Destiny.magnitude);
 
             if (hit2D.Length != 0)
             {
                 foreach (RaycastHit2D hit in hit2D)
                 {
+                    if (hit.transform.gameObject == gameObject) continue;
+
                     if (tagsToAvoid != null && tagsToAvoid.Count != 0)
                     {
                         bool founded = Find_TagIn(tagsToAvoid, hit.transform.tag);
@@ -350,11 +353,10 @@ namespace Xolito.Movement
                         if (founded) continue;
                     }
 
-                    if (hit.transform.gameObject == gameObject) continue;
 
-                    if (Vector2.Angle(finalPosition * -1, hit.normal) < 80)
+                    if (Vector2.Angle(Destiny * -1, hit.normal) < 80)
                     {
-                        float distance = finalPosition.x != 0 ? hit.distance * finalPosition.normalized.x : hit.distance * finalPosition.normalized.y;
+                        float distance = Destiny.x != 0 ? hit.distance * Destiny.normalized.x : hit.distance * Destiny.normalized.y;
                         return distance;
                     }
                 }

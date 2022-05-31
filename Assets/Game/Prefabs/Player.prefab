@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4011542559037227120}
   - component: {fileID: 8668592904928631362}
   - component: {fileID: 3817501240840700648}
+  - component: {fileID: 3670812959593295652}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -116,7 +117,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6440591507710062975}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -165,6 +166,10 @@ MonoBehaviour:
   pSettings: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
   inDash: 0
   isGrounded: 0
+  isBesidePlatform: 0
+  isWallRight: 0
+  angleOfContact: 0
+  canJump: 1
   canDash: 0
 --- !u!95 &8668592904928631362
 Animator:
@@ -281,3 +286,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &3670812959593295652
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6440591507710062975}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.016754618, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1701921
