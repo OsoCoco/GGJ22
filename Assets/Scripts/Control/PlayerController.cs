@@ -18,6 +18,7 @@ namespace Xolito.Control
         public Animator animatorXolos;
         [SerializeField] PlayerSettings pSettings = null;
         Movement.Mover mover;
+        public AudioClip jump, dash;
         #endregion
 
         #region Unity methods
@@ -25,6 +26,8 @@ namespace Xolito.Control
         {
             animatorXolos = GetComponent<Animator>();
             mover = GetComponent<Movement.Mover>();
+            
+
         }
 
         private void Start()
@@ -44,22 +47,28 @@ namespace Xolito.Control
                 if(direction != 0)
                 {
                     //Debug.Log("Direction " + direction);
-                    animatorXolos.SetBool("isMoving",true);
-
-                    if(direction < 0)
-                    {
-                        this.GetComponent<SpriteRenderer>().flipX = true;
-                    }
-                    else 
-                    {
-                        this.GetComponent<SpriteRenderer>().flipX = false;
-                    }
+                    animatorXolos.SetBool("isMoving", true);
+                    ChangeSpriteOrientation(direction);
                 }
-                  
+
                 //animatorXolos.SetInteger(0, (int)direction);
                 //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Walk));
             }
         }
+
+        private void ChangeSpriteOrientation(float direction)
+        {
+            if (direction < 0)
+            {
+                this.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                this.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+
+        
 
         public void Dash()
         {
@@ -76,8 +85,8 @@ namespace Xolito.Control
             {
                 animatorXolos.SetTrigger("jump");
 
-                
-                source.PlayOneShot(pSettings.Get_Audio(BasicActions.Jump));
+                if(source && !source.isPlaying)
+                source?.PlayOneShot(pSettings.Get_Audio(BasicActions.Jump));
             }
         }
         #endregion

@@ -7,7 +7,7 @@ namespace Xolito.Core
 {
     public class LevelController : MonoBehaviour
     {
-        PlayerManager1 manager1;
+        PlayerManager manager1;
 
         [SerializeField] GameObject coinsCounter;
         [SerializeField] GameObject staminaCounter;
@@ -24,7 +24,7 @@ namespace Xolito.Core
 
         private void Awake()
         {
-            manager1 = GameObject.FindObjectOfType<PlayerManager1>();
+            manager1 = GameObject.FindObjectOfType<PlayerManager>();
         }
 
         public bool Change_NextLevel()
