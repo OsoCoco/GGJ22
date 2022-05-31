@@ -12,32 +12,31 @@ namespace Xolito.Movement
     public class Mover : MonoBehaviour
     {
         #region variables
+        [Header("References")]
         [SerializeField] PlayerSettings pSettings = null;
+
+        [Space]
+        [Header("Status")]
+        [SerializeField] private bool inDash = false;
+        [SerializeField] private bool isGrounded = false;
+        [SerializeField] private bool canJump = true;
+        [SerializeField] private bool canDash = false;
+        [SerializeField] private bool isBesidePlatform = false;
+        [SerializeField] private bool isWallRight = false;
+        [SerializeField] private float angleOfContact = 0;
+
         Rigidbody2D rgb2d;
         BoxCollider2D boxCollider;
         BoxCollider2D colliderToAvoid = default;
 
         Vector2 dashVelocity = default;
         Vector2 currentDirection = default;
-        public bool inDash = false;
-        public bool isGrounded = false;
         (bool isTouchingWall, bool isAtRight) wallDetection;
-
-        //GroundCheck
-        public bool isBesidePlatform = false;
-        public bool isWallRight = false;
-        public float angleOfContact = 0;
-
-        public bool canJump = true;
-        bool testJump = false;
-
-        public bool canDash = false;
         #endregion
 
         #region Unity methods
         private void Awake()
         {
-
             rgb2d = GetComponent<Rigidbody2D>();
             boxCollider = GetComponent<BoxCollider2D>();
         }
@@ -50,105 +49,21 @@ namespace Xolito.Movement
 
         private void Update()
         {
-            //if (isGrounded)
-            //    Check_Ground();
-            //else
-            //    Check_GoundWithLines();
-            //Check_GoundWithLines();
             Check_Ground();
-
 
             Check_Wall();
         }
 
-        //private void OnCollisionEnter2D(Collision2D collision)
-        //{
-        //    if (colliderToAvoid)
-        //        Ignore_Collition();
-        //}
-
-        //private void OnCollisionStay2D(Collision2D collision)
-        //{
-        //    try
-        //    {
-        //        if (collision.gameObject.CompareTag("Floor"))
-        //        {
-        //            if (collision.GetContact(0).normal == Vector2.up)
-        //            {
-        //                isGrounded = true;
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.right)
-        //                wallDetection = (true, true);
-        //            else if (collision.GetContact(0).normal == Vector2.left)
-        //                wallDetection = (true, false);
-        //        }
-        //        else if (collision.gameObject.CompareTag("Platform"))
-        //        {
-        //            if (collision.GetContact(0).normal == Vector2.down)
-        //            {
-        //                Ignore_Collition(collision.collider, false);
-        //                isGrounded = true;
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.right)
-        //            {
-        //                wallDetection = (true, true);
-        //                Ignore_Collition(collision.collider, true);
-        //                StartCoroutine(EnableCollition(collision.collider));
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.left)
-        //            {
-        //                wallDetection = (true, true);
-        //                Ignore_Collition(collision.collider, true);
-        //                StartCoroutine(EnableCollition(collision.collider));
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-        //private void OnCollisionExit2D(Collision2D collision)
-        //{
-        //    try
-        //    {
-        //        if (collision.gameObject.CompareTag("Floor"))
-        //        {
-        //            if (collision.GetContact(0).normal == Vector2.up)
-        //            {
-        //                StartCoroutine(ExitGround());
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.right)
-        //                wallDetection = (false, true);
-        //            else if (collision.GetContact(0).normal == Vector2.left)
-        //                wallDetection = (false, false);
-        //        }
-        //        else if (collision.gameObject.CompareTag("Platform"))
-        //        {
-        //            if (collision.GetContact(0).normal == Vector2.up)
-        //            {
-        //                //Ignore_Collition(collision.collider, false);
-        //                //isGrounded = true;
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.right)
-        //            {
-        //                wallDetection = (false, true);
-        //            }
-        //            else if (collision.GetContact(0).normal == Vector2.left)
-        //            {
-        //                wallDetection = (false, true);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //    }
-        //}
-
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawCube(transform.position + Vector3.up, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
-            //Gizmos.DrawWireCube(transform.position + Vector3.up * 1.5f, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
+            try
+            {
+                Gizmos.DrawCube(transform.position + Vector3.up, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
+                //Gizmos.DrawWireCube(transform.position + Vector3.up * 1.5f, new Vector3(boxCollider.size.x * 1f, boxCollider.size.y * 1f, 1));
+            }
+            catch (Exception)
+            {
+            }
         }
         #endregion
 
@@ -234,11 +149,6 @@ namespace Xolito.Movement
             }
         }
 
-        public void ChechkFloor()
-        {
-
-        }
-
         void Check_Ground()
         {
             float? distance = default;
@@ -307,7 +217,7 @@ namespace Xolito.Movement
 
         void Check_Wall()
         {
-            float? distance = Check_WayToMove(currentDirection * .1f, .9f, .1f, pSettings.TagsToAvoid);
+            float? distance = Check_WayToMove(currentDirection * .1f, .8f, .1f, pSettings.TagsToAvoid);
 
             if (colliderToAvoid)
                 wallDetection.isTouchingWall = false;
@@ -352,7 +262,6 @@ namespace Xolito.Movement
                         Check_Collider(hit, founded);
                         if (founded) continue;
                     }
-
 
                     if (Vector2.Angle(Destiny * -1, hit.normal) < 80)
                     {
