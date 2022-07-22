@@ -26,18 +26,40 @@ namespace Xolito.Control
         }
     }
 
-    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "PlayerSettings/New Settings", order = 0)]
+    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "XolitoSettings/Player Settings", order = 0)]
     public class PlayerSettings : ScriptableObject
     {
         #region variables
         [Header("General")]
         [SerializeField] List<string> tagsToAvoid = default;
 
+        [Space]
         [Header("Player Stats")]
+        [Range(0, 6)]
+        [SerializeField] float gravity = 3;
         [SerializeField] float speed = 5;
         [SerializeField] float jumpForce = 5;
         [SerializeField] float jumpCoolDown = 1f;
 
+        [Space]
+        [Header("Ground")]
+        [Header("Collition Settings")]
+        [Range(0, 2)]
+        [SerializeField] float groundDistance = .1f;
+        [Range(0, 2)]
+        [SerializeField] float groundSize = .1f;
+        [SerializeField] float coyoteTime = 1f;
+        [Header("Wall")]
+        [Range(0, 1)]
+        [SerializeField] float wallDistance = .1f;
+        [Range(0, 2)]
+        [SerializeField] float wallSize = .1f;
+        [Header("Jump")]
+        [Range(0, 2)]
+        [SerializeField] float jumpSize = .1f;
+        [Header("Dash")]
+        [Range(0, 1)]
+        [SerializeField] float dashOffset = .1f;
         [Space]
         [Header("Dash Settings")]
         [SerializeField] float dashDistance = 5;
@@ -50,10 +72,18 @@ namespace Xolito.Control
         #endregion
 
         #region Properties
+        public float Gravity { get => gravity * Time.deltaTime; }
         public float Speed { get => speed; }
         public float JumpForce { get => jumpForce; }
         public float JumpCoolDown { get => jumpCoolDown; }
         public List<string> TagsToAvoid { get => tagsToAvoid; }
+
+        public float GroundDistance { get => groundDistance; }
+        public float GroundSize { get => groundSize; }
+        public float CoyoteTime { get => coyoteTime; }
+        public float WallDistance { get => wallDistance; }
+        public float WallSize { get => wallSize; }
+        public float JumpSize { get => jumpSize; }
 
         public float DashDistance { get => dashDistance; }
         public float DashSpeed { get => dashSpeed; }

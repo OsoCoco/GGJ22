@@ -119,7 +119,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000023841858, y: 0.000000044703484}
@@ -150,6 +150,8 @@ MonoBehaviour:
   source: {fileID: 0}
   animatorXolos: {fileID: 8668592904928631362}
   pSettings: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
+  jump: {fileID: 0}
+  dash: {fileID: 0}
 --- !u!114 &4011542559037227120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,11 +167,12 @@ MonoBehaviour:
   pSettings: {fileID: 11400000, guid: abe9689cdafae73489a80d689d8a2b52, type: 2}
   inDash: 0
   isGrounded: 0
-  isBesidePlatform: 0
-  isWallRight: 0
-  angleOfContact: 0
   canJump: 1
   canDash: 0
+  isBesidePlatform: 0
+  isTouchingTheWall: 0
+  isWallRight: 0
+  angleOfContact: 0
 --- !u!95 &8668592904928631362
 Animator:
   serializedVersion: 3

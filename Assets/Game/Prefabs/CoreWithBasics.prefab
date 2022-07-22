@@ -571,6 +571,18 @@ PrefabInstance:
       propertyPath: players.Array.data[1]
       value: 
       objectReference: {fileID: 8756494924772869080}
+    - target: {fileID: 5628039644170474836, guid: cd27e63b9f01d4549b5d5ff53ced816f, type: 3}
+      propertyPath: players.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628039644170474836, guid: cd27e63b9f01d4549b5d5ff53ced816f, type: 3}
+      propertyPath: players.Array.data[0]
+      value: 
+      objectReference: {fileID: 8756494924762804165}
+    - target: {fileID: 5628039644170474836, guid: cd27e63b9f01d4549b5d5ff53ced816f, type: 3}
+      propertyPath: players.Array.data[1]
+      value: 
+      objectReference: {fileID: 8756494924772869080}
     - target: {fileID: 6051760397064019885, guid: cd27e63b9f01d4549b5d5ff53ced816f, type: 3}
       propertyPath: m_Name
       value: PlayersManager

@@ -14,13 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagsToAvoid:
   - Platform
+  gravity: 3
   speed: 2.5
   jumpForce: 3.7
-  jumpCoolDown: 5
+  jumpCoolDown: 1
+  groundDistance: 1.83
+  groundSize: 0.3
+  coyoteTime: 2
+  wallDistance: 0.3
+  wallSize: 0.4
+  jumpSize: 0.1
+  dashOffset: 0.1
   dashDistance: 2
-  dashSpeed: 20
+  dashSpeed: 10
   dashTime: 0.6
-  dashCoolDown: 2
+  dashCoolDown: 1
   audios:
   - clip: {fileID: 8300000, guid: 1b9912a70cbfed2499daf37ad64a3304, type: 3}
     action: 5

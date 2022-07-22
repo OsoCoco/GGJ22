@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Xolito.Utilities
 {
-    public class Utilities
+    public static class Utilities
     {
         public static float Get_Angle(Vector2 direction)
         {
@@ -20,7 +20,7 @@ namespace Xolito.Utilities
             return 0;
         }
 
-        public static bool Find_TagIn(List<string> tagsToAvoid, string tagToFind)
+        public static bool Find_TagIn(string[] tagsToAvoid, string tagToFind)
         {
             bool founded = false;
             foreach (string tag in tagsToAvoid)
