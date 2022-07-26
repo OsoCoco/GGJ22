@@ -14,14 +14,20 @@ namespace Xolito.Utilities
 
 
         BlockData[,] grid;
+
+        public class ColliderData
+        {
+            public List<(int y, int x)> blocks;
+            public bool isHorizontal = false;
+        }
     }
 
     public class BlockData
     {
         public SpriteData sprite;
         public SpriteData backGround;
-        public Vector2 position;
-        public bool isHorizontal = false;
+        public (int y, int x) position;
+        public bool? isHorizontal = null;
         public Vector2 colliderSize = default;
         public Vector2 colliderPosition = default;
 
@@ -30,7 +36,7 @@ namespace Xolito.Utilities
 
         }
 
-        public BlockData(Vector2 position)
+        public BlockData((int y, int x) position)
         {
             this.position = position;
         }

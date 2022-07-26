@@ -42,6 +42,9 @@ MonoBehaviour:
   - sprites:
     - {fileID: 21300000, guid: da4545f4e9c024d47a47f6b42af74478, type: 3}
     type: 1
+  - sprites:
+    - {fileID: 21300000, guid: 75f5d06a5c2e2ac4fbdc29d6287d34e4, type: 3}
+    type: 7
   whiteBlocks:
   - sprites:
     - {fileID: 21300000, guid: 3082dce3d8abea1458f9ae7f9716eda3, type: 3}
@@ -71,3 +74,6 @@ MonoBehaviour:
   - sprites:
     - {fileID: 21300000, guid: 9fbcc2790d56870448102bfd64bea54d, type: 3}
     type: 1
+  - sprites:
+    - {fileID: 21300000, guid: 0d2514dbbab2db74fba7bec7b1faffe1, type: 3}
+    type: 7

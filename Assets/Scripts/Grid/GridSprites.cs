@@ -12,14 +12,14 @@ namespace Xolito.Utilities
         [SerializeField] List<SpritesType> blackBlocks = new List<SpritesType>();
         [SerializeField] List<SpritesType> whiteBlocks = new List<SpritesType>();
 
-        Dictionary<ColorType, Dictionary<BlockType, List<Sprite>>> sprites;
+        Dictionary<ColorType, Dictionary<BlockType, List<(Sprite image, Vector2 offset)>>> sprites;
 
         public Sprite GetSprite(ColorType color, BlockType type, int index)
         {
             if (sprites == null || applyChanges)
                 Initialize();
 
-            return sprites[color][type][index];
+            return sprites[color][type][index].image;
         }
 
         public int Get_SpritesCount(ColorType color, BlockType type)
@@ -27,11 +27,19 @@ namespace Xolito.Utilities
             return sprites[color][type].Count;
         }
 
+        public Vector2 Get_SpriteOffset(ColorType color, BlockType type, int index)
+        {
+            if (sprites == null || applyChanges)
+                Initialize();
+
+            return sprites[color][type][index].offset;
+        }
+
         private void Initialize()
         {
-            sprites = new Dictionary<ColorType, Dictionary<BlockType, List<Sprite>>>();
-            var bSprites = new Dictionary<BlockType, List<Sprite>>();
-            var wSprites = new Dictionary<BlockType, List<Sprite>>();
+            sprites = new Dictionary<ColorType, Dictionary<BlockType, List<(Sprite, Vector2)>>>();
+            var bSprites = new Dictionary<BlockType, List<(Sprite, Vector2)>>();
+            var wSprites = new Dictionary<BlockType, List<(Sprite, Vector2)>>();
 
             foreach (SpritesType data in blackBlocks)
             {

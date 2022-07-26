@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InitialPoints
       objectReference: {fileID: 0}
+    - target: {fileID: 4551940465272296540, guid: 206fda22e888bb9448e74e0a85f9a564, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 206fda22e888bb9448e74e0a85f9a564, type: 3}
 --- !u!1 &4918356857841777819 stripped
